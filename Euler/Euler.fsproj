@@ -10,6 +10,7 @@
     <Compile Include="000\10\Euler1.fs" />
     <Compile Include="000\10\Euler2.fs" />
     <Compile Include="000\10\Euler3.fs" />
+    <Compile Include="000\10\Euler4.fs" />
   </ItemGroup>
 
 </Project>
