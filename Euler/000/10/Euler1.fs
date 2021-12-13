@@ -9,3 +9,9 @@ let isMultipleOfThreeOrFive n =
 
 let sumOfMultiplesBelow n =
     [1..n-1] |> List.map isMultipleOfThreeOrFive |> List.sum
+
+//[<EntryPoint>]
+let main argv =
+    let number = sumOfMultiplesBelow 1000
+    printf "%d" number
+    0
