@@ -16,7 +16,7 @@ let rec fibonacciEvenSum a b sum =
     else
         fibonacciEvenSum b (a+b) newSum
 
-[<EntryPoint>]
+//[<EntryPoint>]
 let main argv =
     let number = fibonacciEvenSum 1 2 0
     printfn $"The result is {number}"
