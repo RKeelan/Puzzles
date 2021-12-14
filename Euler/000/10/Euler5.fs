@@ -9,14 +9,7 @@ https://projecteuler.net/problem=5
 
 open System
 open System.Linq
-
-let rec isDivisibleByList n list =
-    //printfn $"{n}, %A{list}"
-    match list with
-    | [] -> true
-    | _ -> if ((n % list.Head) = 0) then isDivisibleByList n list.Tail else false
-
-
+open Util
 
 //[<EntryPoint>]
 let main argv =
@@ -26,7 +19,7 @@ let main argv =
     // divisible by 10
     let numbers = Seq.initInfinite (fun n -> n*10 + 10)
     let _ = numbers.Take 10 |> Seq.toList |> printfn "%A" 
-    let smallestMulitple = numbers |> Seq.filter (fun n -> isDivisibleByList n divisors) |> Seq.head
+    let smallestMulitple = numbers |> Seq.filter (fun n -> Util.isDivisibleByList n divisors) |> Seq.head
 
     printfn $"{smallestMulitple}"
     0
