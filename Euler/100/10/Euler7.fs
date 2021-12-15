@@ -7,11 +7,8 @@ What is the 10 001st prime number?
 https://projecteuler.net/problem=7
 *)
 
-
-open Util
-
 //[<EntryPoint>]
 let main argv =
     let n = 10001
-    printfn $"Prime #{n} = { Util.nthPrime n}"
+    printfn $"Prime #{n} = { Prime.nthPrime n}"
     0
