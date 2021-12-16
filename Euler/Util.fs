@@ -2,16 +2,37 @@
 
 open System
 open System.Linq
+open LanguagePrimitives
 
 // Math Helpers -----------------------------------------------------------------------------------
 
-let ceilSqrt n = int (ceil (sqrt (float n)))
-let floorSqrt n = int (floor (sqrt (float n)))
+let inline ceilSqrt n = int (ceil (sqrt (float n)))
+let inline floorSqrt n = int (floor (sqrt (float n)))
 
-let isDivisible n d = ((n % d) = 0)
+let inline isDivisible n d = ((n % d) = GenericZero)
 
-let isEven n = isDivisible n 2
+let inline divisorsNaive n =
+    seq { for i in GenericOne .. n -> i }
+    |> Seq.filter (fun i -> isDivisible n i)
+    
+// TODO Make this generic.
+let inline divisors n =
+    match n with
+    | 1 -> seq { 1 }
+    | 2 -> seq { 1; 2 }
+    | _ -> seq { for i in GenericOne .. floorSqrt(n) do
+                 if isDivisible n i then
+                    let divisor = i
+                    let quotient = n/i
+                    yield i
+                    if divisor <> quotient then yield quotient }
 
+// TODO Make this generic.
+let inline isEven n = isDivisible n 2
+
+
+// TODO Make this generic. See here for a lead on how to to do this:
+// https://stackoverflow.com/a/15008816
 let rec isDivisibleByAll n list =
     match list with
     | [] -> true
@@ -22,26 +43,16 @@ let rec isDivisibleByAny n list =
     | [] -> false
     | _ -> if (isDivisible n list.Head) then true else  isDivisibleByAny n list.Tail
 
-
-#nowarn "0064"
-(*
-E.g., Warning FS0064 This construct causes code to be less generic than indicated by the type
-annotations. The type variable 'T has been constrained to be type 'int'.
-
-As far as I can tell, I've explicitly constrained 'T to a type that supports "*", so there should
-be no issue, but apparently not.
-
-(But note that I worked on this before adding the special handing for empty sequence)
-*)
-
-let product(s : seq<'T> when (^T) : (static member (*) : ^T * ^T -> ^T)) =
+let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) =
     match s with
-    | sequence when Seq.isEmpty sequence -> 0
-    | _ -> s |> Seq.reduce (fun (acc:'T) (n:'T) -> acc*n)
+    | sequence when Seq.isEmpty sequence -> GenericZero
+    | _ -> s |> Seq.reduce (fun acc n -> acc*n)
 
 // Miscellaenous ----------------------------------------------------------------------------------
 
 // From https://stackoverflow.com/a/1506343
+// TODO Make this generic. See here for a lead on how to to do this:
+// https://stackoverflow.com/a/15008816
 let rec exceptSorted a b =
     let rec loop acc a b =
         match (a, b) with
