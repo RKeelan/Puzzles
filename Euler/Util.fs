@@ -22,6 +22,23 @@ let rec isDivisibleByAny n list =
     | [] -> false
     | _ -> if (isDivisible n list.Head) then true else  isDivisibleByAny n list.Tail
 
+
+#nowarn "0064"
+(*
+E.g., Warning FS0064 This construct causes code to be less generic than indicated by the type
+annotations. The type variable 'T has been constrained to be type 'int'.
+
+As far as I can tell, I've explicitly constrained 'T to a type that supports "*", so there should
+be no issue, but apparently not.
+
+(But note that I worked on this before adding the special handing for empty sequence)
+*)
+
+let product(s : seq<'T> when (^T) : (static member (*) : ^T * ^T -> ^T)) =
+    match s with
+    | sequence when Seq.isEmpty sequence -> 0
+    | _ -> s |> Seq.reduce (fun (acc:'T) (n:'T) -> acc*n)
+
 // Miscellaenous ----------------------------------------------------------------------------------
 
 // From https://stackoverflow.com/a/1506343
