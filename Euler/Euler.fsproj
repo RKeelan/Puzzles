@@ -26,4 +26,8 @@
     <Compile Include="100\20\Euler11.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.13.14" />
+  </ItemGroup>
+
 </Project>
