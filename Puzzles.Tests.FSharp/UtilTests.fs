@@ -7,7 +7,7 @@ open Util
 open Humanizer
 
 [<Test>]
-let divisorsTest () =
+let divisors () =
     Assert.AreEqual([1], List.sort(Seq.toList(divisors 1)))
     Assert.AreEqual([1; 2], List.sort(Seq.toList(divisors 2)))
     Assert.AreEqual([1; 3], List.sort(Seq.toList(divisors 3)))
@@ -26,7 +26,7 @@ let divisorsTest () =
     Assert.AreEqual([1; 2; 4; 5; 10; 20; 25; 50; 100], List.sort(Seq.toList(divisors 100)))
 
 [<Test>]
-let productTest () =
+let product () =
     let int32Product = [1; 2; 3; 4] |> Util.product
     Assert.AreEqual(1*2*3*4, int32Product)
 

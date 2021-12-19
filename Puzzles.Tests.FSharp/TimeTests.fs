@@ -4,7 +4,7 @@ open Time
 open NUnit.Framework
 
 [<Test>]
-let isLeapYearTest () =
+let isLeapYear () =
     Assert.IsFalse(Time.isLeapYear 1599)
     Assert.IsTrue(Time.isLeapYear 1600)
     Assert.IsFalse(Time.isLeapYear 1601)
@@ -23,7 +23,7 @@ let isLeapYearTest () =
     Assert.IsTrue(Time.isLeapYear 1904)
 
 [<Test>]
-let daysInYearTest () =
+let daysInYear () =
     Assert.AreEqual(365, Time.daysInYear 1599)
     Assert.AreEqual(366, Time.daysInYear 1600)
     Assert.AreEqual(365, Time.daysInYear 1601)

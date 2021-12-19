@@ -74,7 +74,7 @@ let isPrimeFalse () =
         Assert.IsFalse(Prime.isPrime np, $"{np} reported as prime")
         
 [<Test>]
-let nextPrimeTest () =
+let nextPrime () =
     for i in 0 .. (primes.Length - 2) do
         printfn $"Checking prime #{i} ({primes.[i]})"
         // The next prime after the value immediately preceding current prime should be the current
@@ -92,20 +92,20 @@ let primesTest () =
         Assert.AreEqual(primes.[i], primesList.[i])
 
 [<Test>]
-let nthPrimeTest () =
+let nthPrime () =
     for i in 1 .. (primes.Length / 10) do
         Assert.AreEqual(primes.[i-1], Prime.nthPrime i) // -1 because the primes list is zero-indexed
     Assert.AreEqual(104743, Prime.nthPrime 10001)
 
 [<Test>]
-let unfaithfulPrimeSieveTest () =
+let unfaithfulPrimeSieve () =
     // Generate all primes within the table
     let primesList = Prime.unfaithfulPrimeSieve (greatestTestPrime + 1)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])
 
 [<Test>]
-let soPrimesTest () =
+let soPrimes () =
     // Generate all primes within the table
     let primesList = Seq.toList (Prime.soPrimes().Take primes.Length)
     for i in 0 .. (primes.Length - 1) do
