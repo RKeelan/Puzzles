@@ -31,7 +31,6 @@ let inline divisors n =
 let inline isEven n = isDivisible n 2
 let inline isEven64 n = isDivisible n 2L
 
-
 // TODO Make this generic. See here for a lead on how to to do this:
 // https://stackoverflow.com/a/15008816
 let rec isDivisibleByAll n list =

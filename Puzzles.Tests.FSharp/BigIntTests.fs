@@ -3,6 +3,12 @@
 open NUnit.Framework
 open BigInt
 
+let rec double (number : BigInt) (n : int64) =
+    let numberDoubled = number.multiply(2L)
+    match n with
+    | 1L -> numberDoubled
+    | _ -> double numberDoubled (n - 1L)
+
 [<Test>]
 let ctor () =
     let mutable bigInt = BigInt(1L, 10L)
@@ -80,18 +86,19 @@ let toString () =
     Assert.AreEqual("1000000000000000001", bigInt.ToString())
 
 [<Test>]
+let sumOfDigits () =
+    let mutable bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
+    Assert.AreEqual(1366, bigInt.sumOfDigits())
+
+    bigInt <- BigInt.factorial 100L
+    Assert.AreEqual(648, bigInt.sumOfDigits())
+
+[<Test>]
 let multiply () =
     let mutable bigInt = BigInt(6L, 10L)
     bigInt <- bigInt.multiply(2L)
     Assert.AreEqual("12", bigInt.ToString())
-        
-[<Test>]
-let double () =
-    let rec double (number : BigInt) (n : int64) =
-        let numberDoubled = number.multiply(2L)
-        match n with
-        | 1L -> numberDoubled
-        | _ -> double numberDoubled (n - 1L)
+    
     let bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
     let bigResult = "107150860718626732094842504906000181056140481170553360744375038837035105112" +
                     "493612249319837881569585812759467291755314682518714528569231404359845775746" +

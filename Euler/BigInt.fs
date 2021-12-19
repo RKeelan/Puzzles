@@ -47,3 +47,14 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
     member this.multiply (multiplier : int64) : BigInt =
         new BigInt((this.multiplyInternal components multiplier 0L), radix)
+
+    member this.sumOfDigits () : int64 =
+        this.ToString().ToCharArray() |> Array.fold (fun (acc:int64) (c:char) ->
+            acc + Int64.Parse(c.ToString())) 0L
+
+// Static Functions -------------------------------------------------------------------------------
+
+let rec factorial n : BigInt =
+    match n with
+    | 1L -> new BigInt(1L, INT_32_RADIX)
+    | _ -> (factorial (n - 1L)).multiply(n)
