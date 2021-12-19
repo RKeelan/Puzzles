@@ -14,6 +14,7 @@
     <Compile Include="Util.fs" />
     <Compile Include="Prime.fs" />
     <Compile Include="Time.fs" />
+    <Compile Include="BigInt.fs" />
     <Compile Include="100\10\Euler1.fs" />
     <Compile Include="100\10\Euler2.fs" />
     <Compile Include="100\10\Euler3.fs" />
