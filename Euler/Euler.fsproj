@@ -30,9 +30,11 @@
     <Compile Include="100\20\Euler15.fs" />
     <Compile Include="100\20\Euler16.fs" />
     <Compile Include="100\20\Euler17.fs" />
+    <Compile Include="100\20\Euler18.fs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FSharpx.Collections" Version="3.0.1" />
     <PackageReference Include="Humanizer" Version="2.13.14" />
   </ItemGroup>
 
