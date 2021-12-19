@@ -51,6 +51,12 @@ let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) 
 
 // Miscellaenous ----------------------------------------------------------------------------------
 
+let printArray (row : 'a[]) = printfn "%s" (String.Join(" ", row))
+
+let print2DArray (array : 'a[][]) =
+    for row in array do
+        printfn "%s" (String.Join(" ", row))
+
 // From https://stackoverflow.com/a/1506343
 // TODO Make this generic. See here for a lead on how to to do this:
 // https://stackoverflow.com/a/15008816
