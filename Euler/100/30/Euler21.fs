@@ -12,17 +12,15 @@ https://projecteuler.net/problem=21
 
 open System
 
-let amicableDivisors n = Util.divisors n |> Seq.filter (fun a -> a <> n)
-
 let areAmicable a b =
-    let sumOfDivisorsA = amicableDivisors a |> Seq.sum
-    let sumOfDivisorsB = amicableDivisors b |> Seq.sum
+    let sumOfDivisorsA = Util.divisorsExSelf a |> Seq.sum
+    let sumOfDivisorsB = Util.divisorsExSelf b |> Seq.sum
     //printfn $"Sum of {a}'s divisors is {sumOfDivisorsA}"
     //printfn $"Sum of {b}'s divisors is {sumOfDivisorsB}"
     (a = sumOfDivisorsB) && (b = sumOfDivisorsA)
 
 let amicablePair n =
-    let candidate = (amicableDivisors n) |> Seq.sum
+    let candidate = (Util.divisorsExSelf n) |> Seq.sum
     //printfn $"\tChecking {n} and {candidate}"
     if n = candidate then None
     elif areAmicable n candidate then Some(candidate)

@@ -7,6 +7,13 @@ open Util
 open Humanizer
 
 [<Test>]
+let summands () =
+    Assert.AreEqual(seq { (0,1)}, Util.summands 1)
+    Assert.AreEqual(seq { (0,2); (1,1)}, Util.summands 2)
+    Assert.AreEqual(seq { (0,3); (1,2)}, Util.summands 3)
+    Assert.AreEqual(seq { (0,4); (1,3); (2,2)}, Util.summands 4)
+
+[<Test>]
 let divisors () =
     Assert.AreEqual([1], List.sort(Seq.toList(divisors 1)))
     Assert.AreEqual([1; 2], List.sort(Seq.toList(divisors 2)))

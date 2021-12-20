@@ -6,6 +6,8 @@ open LanguagePrimitives
 
 // Math Helpers -----------------------------------------------------------------------------------
 
+let inline summands n = seq { for i in GenericZero .. (n/2) ->  (i,n-i) }
+
 let inline ceilSqrt n = int (ceil (sqrt (float n)))
 let inline floorSqrt n = int (floor (sqrt (float n)))
 
@@ -26,6 +28,8 @@ let inline divisors n =
                     let quotient = n/i
                     yield i
                     if divisor <> quotient then yield quotient }
+
+let inline divisorsExSelf n = divisors n |> Seq.filter (fun m -> m <> n)
 
 // TODO Make this generic.
 let inline isEven n = isDivisible n 2
