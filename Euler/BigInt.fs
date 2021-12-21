@@ -56,5 +56,6 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
 let rec factorial n : BigInt =
     match n with
+    | 0L -> new BigInt(0L, INT_32_RADIX)
     | 1L -> new BigInt(1L, INT_32_RADIX)
     | _ -> (factorial (n - 1L)).multiply(n)

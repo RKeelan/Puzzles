@@ -7,6 +7,13 @@ open Util
 open Humanizer
 
 [<Test>]
+let factorial () =
+    Assert.AreEqual(0, Util.factorial 0)
+    Assert.AreEqual(1, Util.factorial 1)
+    Assert.AreEqual(2, Util.factorial 2)
+    Assert.AreEqual(6, Util.factorial 3)
+
+[<Test>]
 let summands () =
     Assert.AreEqual(seq { (0,1)}, Util.summands 1)
     Assert.AreEqual(seq { (0,2); (1,1)}, Util.summands 2)
