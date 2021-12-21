@@ -94,6 +94,23 @@ let sumOfDigits () =
     Assert.AreEqual(648, bigInt.sumOfDigits())
 
 [<Test>]
+let add () =
+    let mutable a = new BigInt(6L, 10L)
+    let mutable b = new BigInt(5L, 10L)
+    let mutable c = a + b
+    Assert.AreEqual("11", c.ToString())
+
+    a <- new BigInt(21L, 10L)
+    b <- new BigInt(103L, 10L)
+    c <- a + b
+    Assert.AreEqual("124", c.ToString())
+    
+    a <- new BigInt(123456789L, 10L)
+    b <- new BigInt(9L, 10L)
+    c <- a + b
+    Assert.AreEqual("123456798", c.ToString())
+
+[<Test>]
 let multiply () =
     let mutable bigInt = BigInt(6L, 10L)
     bigInt <- bigInt.multiply(2L)
