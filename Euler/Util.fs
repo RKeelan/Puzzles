@@ -6,6 +6,18 @@ open LanguagePrimitives
 
 // Math Helpers -----------------------------------------------------------------------------------
 
+// Return the lowest multiple of x that's less than or equal to y, and the factor that produced it
+let inline lowestMultiple x y =
+    let mutable result = GenericZero
+    while result <= y do
+        result <- result + x
+
+    // When we break out of the while loop result is the first multiple of x greater than y, so
+    // subtract one x
+    let multiple = result - x
+    let factor = multiple / x
+    (multiple, factor) 
+
 // RK 29-Dec-2021: This means reduce the sequence using reduce and the "*" operator
 let inline factorial n = 
     match n with

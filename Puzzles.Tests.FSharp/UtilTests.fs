@@ -7,6 +7,13 @@ open Util
 open Humanizer
 
 [<Test>]
+let lowestMultiple () =
+    Assert.AreEqual((2, 2), (Util.lowestMultiple 1 2))
+    Assert.AreEqual((2, 1), (Util.lowestMultiple 2 3))
+    Assert.AreEqual((12, 3), (Util.lowestMultiple 4 15))
+    Assert.AreEqual((24, 4), (Util.lowestMultiple 6 24))
+
+[<Test>]
 let factorial () =
     Assert.AreEqual(0, Util.factorial 0)
     Assert.AreEqual(1, Util.factorial 1)
