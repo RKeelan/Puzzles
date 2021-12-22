@@ -4,7 +4,10 @@ open System.Linq
 
 let isPrime p =
     match p with
-    | 1 | 4 | 6 | 8 | 10 -> false
+    // RK 21-Dec-2021: Based on the answer to Euler #27, Project Euler doesn't consider negative
+    // numbers to be prime
+    | m when m < 0 -> false
+    | 0 | 1 | 4 | 6 | 8 | 10 -> false
     | 2 | 3 | 5 | 7 | 11 -> true
     | _ ->
         let divisors = [2 .. (Util.ceilSqrt p)]
@@ -39,7 +42,7 @@ let rec sieve list =
     | head::tail -> head :: (sieve <| List.filter (fun x -> x % head <> 0) tail)
     | [] -> []
 
-let unfaithfulPrimeSieve n = sieve [2 .. n]
+let naivePrimeSieve n = sieve [2 .. n]
 
 type GenericHeap<'T when 'T : comparison>(defaultValue : 'T) =
     let mutable capacity = 1

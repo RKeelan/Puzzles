@@ -100,7 +100,7 @@ let nthPrime () =
 [<Test>]
 let unfaithfulPrimeSieve () =
     // Generate all primes within the table
-    let primesList = Prime.unfaithfulPrimeSieve (greatestTestPrime + 1)
+    let primesList = Prime.naivePrimeSieve (greatestTestPrime + 1)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])
 
