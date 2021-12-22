@@ -4,6 +4,10 @@ open System
 open System.Linq
 open LanguagePrimitives
 
+// Tuple Helpers ----------------------------------------------------------------------------------
+
+let thirdOf3 (_, _, c) = c
+
 // Math Helpers -----------------------------------------------------------------------------------
 
 // Return the lowest multiple of x that's less than or equal to y, and the factor that produced it
