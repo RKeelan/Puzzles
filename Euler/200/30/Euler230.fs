@@ -1,4 +1,4 @@
-﻿module Euler30
+﻿module Euler230
 
 (*
 For any two strings of digits, A and B, we define F-A,B to be the sequence (A,B,AB,BAB,ABBAB,...)
@@ -31,6 +31,7 @@ and for B the next hundred digits:
 48111745028410270193852110555964462294895493038196 .
 
 Find ∑n = 0,1,...,17   10n× DA,B((127+19n)×7n) .
+
 *)
 
 (*
