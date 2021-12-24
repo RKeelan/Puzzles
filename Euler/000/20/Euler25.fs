@@ -41,7 +41,7 @@ let main argv =
         fn <- f1 + f2
         n <- (n + 1)
         //if (Util.isDivisible n 10) then do printfn $"The {n.Ordinalize()} term of the Fibonacci sequence is {fn}"
-    printfn $"The {n.Ordinalize()} term of the Fibonacci sequence is the first witn {d} digits"
+    printfn $"The {n.Ordinalize()} term of the Fibonacci sequence is the first with {d} digits"
     
     stopWatch.Stop()
     printfn $"Execution time: {stopWatch.Elapsed.TotalMilliseconds:N0} ms." 
