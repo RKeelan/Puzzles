@@ -94,3 +94,8 @@ let rotate () =
 [<Test>]
 let rotations () =
     Assert.AreEqual(["100";"001";"010"], (rotations "100"))
+    
+[<Test>]
+let isPalindrome () =
+    Assert.IsTrue(Util.isPalindrome "abba")
+    Assert.IsTrue(Util.isPalindrome "abcba")

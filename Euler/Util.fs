@@ -100,6 +100,12 @@ let rotations s = seq {
         | _ -> Some((str, rotate str)))
     }
 
+let isPalindrome (s:string) =
+    let frontHalf = s.Substring(0, s.Length/2)
+    let backHalfStart = if isEven s.Length then s.Length/2 else s.Length/2 + 1
+    let backHalf = new string(s.Substring(backHalfStart) |> Seq.rev |> Seq.toArray)
+    frontHalf = backHalf
+
 // Miscellaenous ----------------------------------------------------------------------------------
 
 let printArray (row : 'a[]) = printfn "%s" (String.Join(" ", row))
