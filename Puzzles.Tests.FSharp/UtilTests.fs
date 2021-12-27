@@ -64,6 +64,15 @@ let factors () =
     Assert.AreEqual([(1,28);(2,14);(4,7)], Seq.toList(factors 28))
     
     Assert.AreEqual([(1,100);(2,50);(4,25);(5,20);(10,10)], Seq.toList(factors 100))
+
+[<Test>]
+let product () =
+    let int32Product = [1; 2; 3; 4] |> Util.product
+    Assert.AreEqual(1*2*3*4, int32Product)
+
+    // RK 15-Dec-2021 See comment on Util.product
+    //let int64Product = [1000L; 2000L; 3000L; 4000L] |> Util.product
+    //Assert.AreEqual(1000L*2000L*3000L*4000L, int64Product)
     
 [<Test>]
 let hasDuplicates () =
@@ -77,12 +86,11 @@ let hasDuplicates () =
 
     Assert.IsFalse(hasDuplicates "1234568790")
     Assert.IsFalse(hasDuplicates "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv")
-
+    
 [<Test>]
-let product () =
-    let int32Product = [1; 2; 3; 4] |> Util.product
-    Assert.AreEqual(1*2*3*4, int32Product)
-
-    // RK 15-Dec-2021 See comment on Util.product
-    //let int64Product = [1000L; 2000L; 3000L; 4000L] |> Util.product
-    //Assert.AreEqual(1000L*2000L*3000L*4000L, int64Product)
+let rotate () =
+    Assert.AreEqual("001", (rotate "100"))
+    
+[<Test>]
+let rotations () =
+    Assert.AreEqual(["100";"001";"010"], (rotations "100"))

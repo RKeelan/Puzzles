@@ -35,6 +35,7 @@ let inline summands n = seq { for i in GenericZero .. (n/2) ->  (i,n-i) }
 let inline ceilSqrt n = int (ceil (sqrt (float n)))
 let inline floorSqrt n = int (floor (sqrt (float n)))
 
+/// Rerturns true is n is divisible by d
 let inline isDivisible n d = ((n % d) = GenericZero)
 
 let inline divisorsNaive n =
@@ -88,6 +89,16 @@ let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) 
 let hasDuplicates (s:string) : bool =
     let set = s.ToCharArray() |> Set.ofSeq
     set.Count < s.Length
+
+let rotate (s:string) = s.Substring(1) + s.[0].ToString()
+
+let rotations s = seq {
+    yield s
+    yield! rotate s |> Seq.unfold (fun str ->
+        match str with
+        | original when original = s -> None
+        | _ -> Some((str, rotate str)))
+    }
 
 // Miscellaenous ----------------------------------------------------------------------------------
 
