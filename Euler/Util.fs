@@ -55,6 +55,13 @@ let inline divisors n =
 
 let inline divisorsExSelf n = divisors n |> Seq.filter (fun m -> m <> n)
 
+let inline factors n =
+    match n with
+    | 1 -> seq { (1,1) }
+    | 2 -> seq { (1,2) }
+    | _ -> seq { for i in GenericOne .. floorSqrt(n) do
+                 if isDivisible n i then yield (i, n/i)}
+
 // TODO Make this generic.
 let inline isEven n = isDivisible n 2
 let inline isEven64 n = isDivisible n 2L
@@ -75,6 +82,12 @@ let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) 
     match s with
     | sequence when Seq.isEmpty sequence -> GenericZero
     | _ -> s |> Seq.reduce (fun acc n -> acc*n)
+
+// String Helpers ---------------------------------------------------------------------------------
+
+let hasDuplicates (s:string) : bool =
+    let set = s.ToCharArray() |> Set.ofSeq
+    set.Count < s.Length
 
 // Miscellaenous ----------------------------------------------------------------------------------
 

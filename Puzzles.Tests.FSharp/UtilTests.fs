@@ -47,6 +47,38 @@ let divisors () =
     Assert.AreEqual([1; 2; 4; 5; 10; 20; 25; 50; 100], List.sort(Seq.toList(divisors 100)))
 
 [<Test>]
+let factors () =
+    Assert.AreEqual([(1,1)], Seq.toList(factors 1))
+    Assert.AreEqual([(1,2)], Seq.toList(factors 2))
+    Assert.AreEqual([(1,3)], Seq.toList(factors 3))
+    Assert.AreEqual([(1,4);(2,2)], Seq.toList(factors 4))
+    Assert.AreEqual([(1,5)], Seq.toList(factors 5))
+    Assert.AreEqual([(1,6);(2,3)], Seq.toList(factors 6))
+    Assert.AreEqual([(1,7)], Seq.toList(factors 7))
+    Assert.AreEqual([(1,8);(2,4)], Seq.toList(factors 8))
+    Assert.AreEqual([(1,9);(3,3)], Seq.toList(factors 9))
+    
+    Assert.AreEqual([(1,10);(2,5)], Seq.toList(factors 10))
+    Assert.AreEqual([(1,15);(3,5)], Seq.toList(factors 15))
+    Assert.AreEqual([(1,21);(3,7)], Seq.toList(factors 21))
+    Assert.AreEqual([(1,28);(2,14);(4,7)], Seq.toList(factors 28))
+    
+    Assert.AreEqual([(1,100);(2,50);(4,25);(5,20);(10,10)], Seq.toList(factors 100))
+    
+[<Test>]
+let hasDuplicates () =
+    Assert.IsTrue(hasDuplicates "1123456790")
+    Assert.IsTrue(hasDuplicates "111111")
+    Assert.IsTrue(hasDuplicates "11")
+    Assert.IsTrue(hasDuplicates "1122")
+    Assert.IsTrue(hasDuplicates "aab")
+    Assert.IsTrue(hasDuplicates "abb")
+    Assert.IsTrue(hasDuplicates "abbc")
+
+    Assert.IsFalse(hasDuplicates "1234568790")
+    Assert.IsFalse(hasDuplicates "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv")
+
+[<Test>]
 let product () =
     let int32Product = [1; 2; 3; 4] |> Util.product
     Assert.AreEqual(1*2*3*4, int32Product)
