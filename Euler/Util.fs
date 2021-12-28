@@ -83,6 +83,8 @@ let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) 
     match s with
     | sequence when Seq.isEmpty sequence -> GenericZero
     | _ -> s |> Seq.reduce (fun acc n -> acc*n)
+    
+let isInteger (d:double) = d%1.=0.
 
 // String Helpers ---------------------------------------------------------------------------------
 

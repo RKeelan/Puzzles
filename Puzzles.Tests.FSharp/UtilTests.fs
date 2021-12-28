@@ -75,6 +75,14 @@ let product () =
     //Assert.AreEqual(1000L*2000L*3000L*4000L, int64Product)
     
 [<Test>]
+let isInteger () =
+    Assert.IsTrue(isInteger 1.0)
+    Assert.IsTrue(isInteger 2.0)
+    
+    Assert.IsFalse(isInteger 0.5)
+    Assert.IsFalse(isInteger 1.5)
+
+[<Test>]
 let hasDuplicates () =
     Assert.IsTrue(hasDuplicates "1123456790")
     Assert.IsTrue(hasDuplicates "111111")
