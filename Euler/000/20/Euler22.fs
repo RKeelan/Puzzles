@@ -31,7 +31,7 @@ let main argv =
     let position = 938L
     printfn $"The name score of {name} at position {position} is {alphabetizedScore position name}"
     
-    let line = Seq.head (File.ReadLines @"..\..\..\100\30\Euler22.txt")
+    let line = Seq.head (File.ReadLines @"..\..\..\000\20\Euler22.txt")
     let names = line.Split([|',';'"'|], StringSplitOptions.RemoveEmptyEntries)
     let sortedNames = names |> Seq.sort |> Seq.toArray
     //File.WriteAllLines(@"..\..\..\100\30\Euler22-ProcessedNames.txt", sortedNames)
