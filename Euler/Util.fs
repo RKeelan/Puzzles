@@ -67,17 +67,19 @@ let inline factors n =
 let inline isEven n = isDivisible n 2
 let inline isEven64 n = isDivisible n 2L
 
-// TODO Make this generic. See here for a lead on how to to do this:
-// https://stackoverflow.com/a/15008816
-let rec isDivisibleByAll n list =
-    match list with
-    | [] -> true
-    | _ -> if (isDivisible n list.Head) then isDivisibleByAll n list.Tail else false
+let inline isDivisibleByAll n list =
+    let rec isDivisibleByAll n list =
+        match list with
+        | [] -> true
+        | _ -> if (isDivisible n list.Head) then isDivisibleByAll n list.Tail else false
+    isDivisibleByAll n list
     
-let rec isDivisibleByAny n list =
-    match list with
-    | [] -> false
-    | _ -> if (isDivisible n list.Head) then true else  isDivisibleByAny n list.Tail
+let inline isDivisibleByAny n list =
+    let rec isDivisibleByAny n list =
+        match list with
+        | [] -> false
+        | _ -> if (isDivisible n list.Head) then true else isDivisibleByAny n list.Tail
+    isDivisibleByAny n list
 
 let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) =
     match s with

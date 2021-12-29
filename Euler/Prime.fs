@@ -14,6 +14,18 @@ let isPrime p =
         //printfn "%A" divisors
         not (Util.isDivisibleByAny p divisors)
 
+let isPrime64 p =
+    match p with
+    // RK 21-Dec-2021: Based on the answer to Euler #27, Project Euler doesn't consider negative
+    // numbers to be prime
+    | m when m < 0L -> false
+    | 0L | 1L | 4L | 6L | 8L | 10L -> false
+    | 2L | 3L | 5L | 7L | 11L -> true
+    | _ ->
+        let divisors = [2L .. (Util.ceilSqrt p)]
+        //printfn "%A" divisors
+        not (Util.isDivisibleByAny p divisors)
+
 let nextPrime start =
     // RK 14-Dec-2021: Use the match to handle various corner cases
     match start with
