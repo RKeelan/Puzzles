@@ -107,3 +107,62 @@ let rotations () =
 let isPalindrome () =
     Assert.IsTrue(Util.isPalindrome "abba")
     Assert.IsTrue(Util.isPalindrome "abcba")
+    
+[<Test>]
+let isPandigital () =
+    Assert.IsTrue(Util.isPandigital "1" 1)
+    Assert.IsTrue(Util.isPandigital "21" 2)
+    Assert.IsTrue(Util.isPandigital "132" 3)
+    Assert.IsTrue(Util.isPandigital "4132" 4)
+    Assert.IsTrue(Util.isPandigital "41532" 5)
+    Assert.IsTrue(Util.isPandigital "415362" 6)
+    Assert.IsTrue(Util.isPandigital "7415362" 7)
+    Assert.IsTrue(Util.isPandigital "74153628" 8)
+    Assert.IsTrue(Util.isPandigital "974153628" 9)
+    
+    Assert.IsFalse(Util.isPandigital "074153628" 9)
+    Assert.IsFalse(Util.isPandigital "9974153628" 9)
+    Assert.IsFalse(Util.isPandigital "74153628" 9)
+
+[<Test>]
+let lexicographicPermutations () =
+    let mutable expected = [
+        "123";
+        "132";
+        "213";
+        "231";
+        "312";
+        "321"
+    ]
+    let mutable p = Util.lexicographicPermutations "321"
+    Assert.AreEqual(expected, p)
+
+    expected <- [
+        "1234";
+        "1243";
+        "1324";
+        "1342";
+        "1423";
+        "1432";
+        "2134";
+        "2143";
+        "2314";
+        "2341";
+        "2413";
+        "2431";
+        "3124";
+        "3142";
+        "3214";
+        "3241";
+        "3412";
+        "3421";
+        "4123";
+        "4132";
+        "4213";
+        "4231";
+        "4312";
+        "4321"
+    ]
+    p <- Util.lexicographicPermutations "3241"
+    printfn "%s" (String.Join("\n", p))
+    Assert.AreEqual(expected, p)
