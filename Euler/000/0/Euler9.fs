@@ -21,7 +21,7 @@ c = m^2 + n^2
 *)
 
 open System.Linq
-
+open Numbers
 
 let ascendingTuples i = seq {for j in 1 .. i do yield (i, j)}
 
@@ -33,7 +33,7 @@ let main argv =
             for n in 1 .. m ->
                 let a = (m*m) - (n*n)
                 let b = 2*m*n
-                let c = Util.ceilSqrt((a*a) + (b*b))
+                let c = ceilSqrt((a*a) + (b*b))
                 let s = a + b + c
                 (a, b, c, s)
         }

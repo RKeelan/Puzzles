@@ -11,10 +11,10 @@ https://projecteuler.net/problem=35
 *)
 
 open System
-
+open Strings
 
 let isCircularPrime n =
-    let rotations = Util.rotations (n.ToString()) |> Seq.toList |> Seq.map Int32.Parse |> Seq.toList
+    let rotations = rotations (n.ToString()) |> Seq.toList |> Seq.map Int32.Parse |> Seq.toList
     let primeRotations = rotations |> List.filter Prime.isPrime
     rotations.Length = primeRotations.Length
 
@@ -27,7 +27,7 @@ let circularPrimes n =
 let main argv =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     
-    let rotations197 = Util.rotations "197"
+    let rotations197 = rotations "197"
     printfn "%s" (String.Join('\n', rotations197))
     printfn $"197 is a circular prime: {isCircularPrime 197}"
     printfn $"971 is a circular prime: {isCircularPrime 971}"

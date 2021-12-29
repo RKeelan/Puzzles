@@ -1,7 +1,7 @@
 ﻿module Time
 
 open System
-open Util
+open Numbers
 
 // Types ------------------------------------------------------------------------------------------
 
@@ -31,10 +31,10 @@ type Month =
 // Year Functions ---------------------------------------------------------------------------------
 
 let isLeapYear (year:int) : bool =
-    if not(Util.isDivisible year 4) then false
+    if not(isDivisible year 4) then false
     else
-        if Util.isDivisible year 400 then true
-        elif Util.isDivisible year 100 then false
+        if isDivisible year 400 then true
+        elif isDivisible year 100 then false
         else true
 
 let daysInYear year = if isLeapYear year then 366 else 365

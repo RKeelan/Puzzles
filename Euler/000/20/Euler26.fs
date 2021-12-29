@@ -24,12 +24,12 @@ https://projecteuler.net/problem=26
 *)
 
 open System
-open Util
+open Numbers
 
 let rec divideRec numerator denominator previousNumerators : list<int> =
     if  denominator > numerator then 0 :: (divideRec (numerator*10) denominator previousNumerators)
     else
-        let (multiple, factor) = Util.lowestMultiple denominator numerator 
+        let (multiple, factor) = lowestMultiple denominator numerator 
         let remainder = numerator - multiple
         if remainder = 0 then
             //printfn "\tTerminating decimal detected"

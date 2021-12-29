@@ -1,6 +1,7 @@
 ﻿module Prime
 
 open System.Linq
+open Numbers
 
 let isPrime p =
     match p with
@@ -10,9 +11,9 @@ let isPrime p =
     | 0 | 1 | 4 | 6 | 8 | 10 -> false
     | 2 | 3 | 5 | 7 | 11 -> true
     | _ ->
-        let divisors = [2 .. (Util.ceilSqrt p)]
+        let divisors = [2 .. (ceilSqrt p)]
         //printfn "%A" divisors
-        not (Util.isDivisibleByAny p divisors)
+        not (isDivisibleByAny p divisors)
 
 let isPrime64 p =
     match p with
@@ -22,9 +23,9 @@ let isPrime64 p =
     | 0L | 1L | 4L | 6L | 8L | 10L -> false
     | 2L | 3L | 5L | 7L | 11L -> true
     | _ ->
-        let divisors = [2L .. (Util.ceilSqrt p)]
+        let divisors = [2L .. (ceilSqrt p)]
         //printfn "%A" divisors
-        not (Util.isDivisibleByAny p divisors)
+        not (isDivisibleByAny p divisors)
 
 let nextPrime start =
     // RK 14-Dec-2021: Use the match to handle various corner cases
@@ -35,7 +36,7 @@ let nextPrime start =
         // RK 14-Dec-2021: This is a bit controverial, but I feel like calling "nextPrime" on a
         // prime number should return the next prime after that number, not that number
         let firstNonPrime = if isPrime start then (start + 1) else start
-        let sequenceStart = if Util.isEven firstNonPrime then (firstNonPrime + 1) else firstNonPrime
+        let sequenceStart = if isEven firstNonPrime then (firstNonPrime + 1) else firstNonPrime
         let candidates = Seq.initInfinite (fun n -> n*2 + sequenceStart)
         Seq.head (candidates |> Seq.filter (fun n -> isPrime n))
 

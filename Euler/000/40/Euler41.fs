@@ -14,6 +14,8 @@ https://projecteuler.net/problem=41
 *)
                                                                                                    
 open System
+open Numbers
+open Strings
 
 //[<EntryPoint>]
 let main argv =
@@ -27,8 +29,8 @@ let main argv =
     // RK 28-Dec-2021: I cheated a bit here, and ran the code with "123456789" first. When that ran
     // for a full minute, I aborted and tried "12345678"
     let digits = "1234567"
-    let numbers = Util.lexicographicPermutations digits |> Seq.map Int64.Parse
-    let candidates = numbers |> Seq.filter (fun n -> not (Util.isEven64 n)) |> Seq.toList |> List.sortByDescending id
+    let numbers = lexicographicPermutations digits |> Seq.map Int64.Parse
+    let candidates = numbers |> Seq.filter (fun n -> not (isEven64 n)) |> Seq.toList |> List.sortByDescending id
     //let odd = List.head candidates
     //printfn $"The largest odd pandigital number is {odd}"
     let primes = candidates |> Seq.filter Prime.isPrime64

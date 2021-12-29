@@ -10,17 +10,17 @@ Evaluate the sum of all the amicable numbers under 10000.
 https://projecteuler.net/problem=21
 *)
 
-open System
+open Numbers
 
 let areAmicable a b =
-    let sumOfDivisorsA = Util.divisorsExSelf a |> Seq.sum
-    let sumOfDivisorsB = Util.divisorsExSelf b |> Seq.sum
+    let sumOfDivisorsA = divisorsExSelf a |> Seq.sum
+    let sumOfDivisorsB = divisorsExSelf b |> Seq.sum
     //printfn $"Sum of {a}'s divisors is {sumOfDivisorsA}"
     //printfn $"Sum of {b}'s divisors is {sumOfDivisorsB}"
     (a = sumOfDivisorsB) && (b = sumOfDivisorsA)
 
 let amicablePair n =
-    let candidate = (Util.divisorsExSelf n) |> Seq.sum
+    let candidate = (divisorsExSelf n) |> Seq.sum
     //printfn $"\tChecking {n} and {candidate}"
     if n = candidate then None
     elif areAmicable n candidate then Some(candidate)

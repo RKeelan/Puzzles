@@ -9,10 +9,11 @@ Find the sum of all numbers, less than one million, which are palindromic in bas
 *)
 
 open System
+open Strings
 
 let isDoubleBasePalindrome (n:int) =
-    let isBaseTenPalindrome = Util.isPalindrome (n.ToString())
-    let isBaseTwoPalinrome = Util.isPalindrome (Convert.ToString(n,2))
+    let isBaseTenPalindrome = isPalindrome (n.ToString())
+    let isBaseTwoPalinrome = isPalindrome (Convert.ToString(n,2))
     //printfn $"{n} in binary is {Convert.ToString(n,2)}"
     isBaseTenPalindrome && isBaseTwoPalinrome
 

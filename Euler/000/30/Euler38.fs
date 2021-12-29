@@ -27,10 +27,11 @@ we get a 1-9 pandigital number
 *)
 
 open System
+open Strings
 
 let rec pandigitalMultipleRec number n (acc:string) : option<string> = 
     if acc.Contains('0') then None
-    elif Util.hasDuplicates acc then None
+    elif hasDuplicates acc then None
     elif acc.Length = 9 then Some(acc)
     else pandigitalMultipleRec number (n+1) (acc+((number*n).ToString()))
     

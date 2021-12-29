@@ -22,6 +22,7 @@ https://projecteuler.net/problem=12
 *)
 
 open System.Linq
+open Numbers
 
 type triangleNumber = {
     index : int64
@@ -38,7 +39,7 @@ let triangleNumbers : seq<triangleNumber> =
         // RK: Here, and in various other places, I cast an int64 to int32. This is to deal with
         // the fact that Util.divisors is not generic with respect to primitive arithmetic types.
         // It seems like this should be possible to do, but I've found it quite vexing so far.
-        divisors = Seq.toList (Util.divisors (int32(state.number + state.index) + 1))
+        divisors = Seq.toList (divisors (int32(state.number + state.index) + 1))
     }))
 
 //[<EntryPoint>]

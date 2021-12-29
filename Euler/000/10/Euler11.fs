@@ -37,6 +37,9 @@ calculate the horizontal, vertical, and diagonal product, and add all three to a
 
 At the end, find the largest number
 *)
+
+open Numbers
+
 [<Literal>]
 let NUM_ELEMENTS = 4
 
@@ -112,7 +115,7 @@ let main argv =
 
     let factors = traverse matrix
     //let _ = factors |> List.map (fun factors -> (printfn "%A" factors))
-    let products = factors |> List.map (fun factors -> (Util.product(factors), factors))
+    let products = factors |> List.map (fun factors -> (product(factors), factors))
     let sortedProducts = products |> List.sortBy (fun x -> - fst x)
     let maxProduct = fst (sortedProducts |> List.head)
     printfn $"{maxProduct:N0}"

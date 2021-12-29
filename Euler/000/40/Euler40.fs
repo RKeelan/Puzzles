@@ -19,8 +19,8 @@ https://projecteuler.net/problem=40
 *)
 
 open System
-open Humanizer
 open System.Collections.Generic
+open Numbers
 
 let champernownesDigits = seq {for i in 1..Int32.MaxValue do yield! i.ToString().ToCharArray() }
 
@@ -42,7 +42,7 @@ let main argv =
     let digits = enumerateDigits digitEnumerator [1;9;90;900;9000;90000;900000]
     printfn $"The digits are:"
     printfn "%s" (String.Join("\n", digits))
-    let product = Util.product digits
+    let product = product digits
     printfn $"The product of the digits is {product}"
 
    

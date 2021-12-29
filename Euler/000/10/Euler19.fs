@@ -27,6 +27,7 @@ https://projecteuler.net/problem=19
 
 open System
 open Time
+open Numbers
 
 [<Literal>]
 let EPOC_DAY = 7
@@ -44,7 +45,7 @@ let daysSinceEpoc dayOfYear year =
 
 let isSunday day year =
     let days = daysSinceEpoc day year
-    Util.isDivisible days 7
+    isDivisible days 7
      
 //[<EntryPoint>]
 let main argv =

@@ -9,9 +9,11 @@
 
   <ItemGroup>
     <Compile Include="UtilTests.fs" />
+    <Compile Include="NumbersTests.fs" />
     <Compile Include="PrimeTests.fs" />
     <Compile Include="TimeTests.fs" />
     <Compile Include="BigIntTests.fs" />
+    <Compile Include="StringsTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

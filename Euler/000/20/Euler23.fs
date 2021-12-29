@@ -19,9 +19,11 @@ numbers.
 https://projecteuler.net/problem=23
 *)
 
-let isAbundant n = (Util.divisorsExSelf n |> Seq.sum) > n
+open Numbers
 
-let isNotAbundantSum n = Util.summands n |> Seq.filter (fun (n,m) -> (isAbundant n) && (isAbundant m)) |> Seq.isEmpty
+let isAbundant n = (divisorsExSelf n |> Seq.sum) > n
+
+let isNotAbundantSum n = summands n |> Seq.filter (fun (n,m) -> (isAbundant n) && (isAbundant m)) |> Seq.isEmpty
         
 
 //[<EntryPoint>]

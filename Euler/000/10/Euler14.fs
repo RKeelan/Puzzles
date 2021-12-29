@@ -26,7 +26,7 @@ Approach:
 *)
 
 open System
-open Util
+open Numbers
 
 type colltazLength = {
     start : int64

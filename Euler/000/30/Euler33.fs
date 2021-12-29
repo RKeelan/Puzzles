@@ -36,6 +36,7 @@ are zeros, and that's actually kind of true
 *)
 
 open System
+open Numbers
 
 let fractions =
     seq {
@@ -49,7 +50,7 @@ let fractions =
                 
     }
     |> Seq.filter (fun (a,b) -> not (a.ToString().Contains('0') || b.ToString().Contains('0')))
-    |> Seq.filter (fun (a,b) -> not ((Util.isDivisible a 11) || (Util.isDivisible b 11)))
+    |> Seq.filter (fun (a,b) -> not ((isDivisible a 11) || (isDivisible b 11)))
 
 // RK 26-Dec-2021: I don't need to worry about the case where both digits matcn (e.g., 19/91),
 // because the value of the fraction after digit cancellation will be 1, which won't be true of the
@@ -72,11 +73,11 @@ let main argv =
     //printfn "%s" (String.Join('\n', candidates))
     let examples = candidates |> Seq.filter (fun x -> digitsCancel x)
     //printfn "%s" (String.Join('\n', examples))
-    let productNumerator =  examples |> Seq.map fst |> Util.product
-    let productDenominator = examples |> Seq.map snd |> Util.product
+    let productNumerator =  examples |> Seq.map fst |> product
+    let productDenominator = examples |> Seq.map snd |> product
     printfn $"The product of the fractions is {productNumerator}/{productDenominator}"
-    let numeratorDivisors = Util.divisors productNumerator |> Set.ofSeq
-    let denominatorDivisors = Util.divisors productDenominator |> Set.ofSeq
+    let numeratorDivisors = divisors productNumerator |> Set.ofSeq
+    let denominatorDivisors = divisors productDenominator |> Set.ofSeq
     let commonDivisors = Set.intersect numeratorDivisors denominatorDivisors
     printfn $"These are the common divisors"
     printfn "%s" (String.Join('\n', commonDivisors))

@@ -26,6 +26,8 @@ results in a map to keep track of which perimeter different tuples were for
     - the b side has to go higher than 1/3 of the max perimeter, but I'm not sure how much higher
 *)
 
+open Numbers
+
 type Triangle =
     {
         a : int
@@ -44,7 +46,7 @@ let triangles N =
     for a in 3..N/3 do
         for b in a .. N/2 do
             let t = {a=a;b=b}
-            if Util.isInteger t.c && t.p <= N then yield t
+            if isInteger t.c && t.p <= N then yield t
     }
 
 let perimeterSolutions N =

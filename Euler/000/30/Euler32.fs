@@ -29,11 +29,13 @@ https://projecteuler.net/problem=32
 *)  
 
 open System
+open Numbers
+open Strings
 
-let isPandigital (s:string) = (not (Util.hasDuplicates s)) && (s.Length = 9)
+let isPandigital (s:string) = (not (hasDuplicates s)) && (s.Length = 9)
 
 let isPandigitalProduct (n:int) =
-    let factors = Util.factors n |> Seq.filter (fun (a,b) -> not ($"{a}{b}".Contains('0')))
+    let factors = factors n |> Seq.filter (fun (a,b) -> not ($"{a}{b}".Contains('0')))
     let panDigitalFactors = factors |> Seq.filter (fun (a,b) -> isPandigital $"{n}{a}{b}")
     if not (Seq.isEmpty panDigitalFactors) then do
         printfn $"{n}"
@@ -44,7 +46,7 @@ let isPandigitalProduct (n:int) =
 let panDigitalCandidates =
     seq {1234..9876}
     |> Seq.filter (fun n -> not (n.ToString().Contains('0')))
-    |> Seq.filter (fun n -> not (Util.hasDuplicates (n.ToString())))
+    |> Seq.filter (fun n -> not (hasDuplicates (n.ToString())))
     |> Seq.filter isPandigitalProduct
 
 
