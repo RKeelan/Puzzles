@@ -3,6 +3,9 @@
 open System
 open Numbers
 
+let letterScore (c:char) = (int32(c) - int32('A') + 1)
+let wordScore (s:string) = s.ToCharArray() |> Array.map letterScore |> Array.sum
+
 let hasDuplicates (s:string) : bool =
     let set = s.ToCharArray() |> Set.ofSeq
     set.Count < s.Length
