@@ -79,3 +79,56 @@ let isInteger () =
     
     Assert.IsFalse(isInteger 0.5)
     Assert.IsFalse(isInteger 1.5)
+
+[<Test>]
+let isTriangleNumber () =
+    Assert.IsFalse(isTriangleNumber 0)
+    Assert.IsTrue(isTriangleNumber 1)
+    Assert.IsFalse(isTriangleNumber 2)
+    Assert.IsTrue(isTriangleNumber 3)
+    Assert.IsFalse(isTriangleNumber 4)
+    
+    Assert.IsFalse(isTriangleNumber 5)
+    Assert.IsTrue(isTriangleNumber 6)
+    Assert.IsFalse(isTriangleNumber 7)
+    
+    Assert.IsFalse(isTriangleNumber 9)
+    Assert.IsTrue(isTriangleNumber 10)
+    Assert.IsFalse(isTriangleNumber 11)
+    
+    Assert.IsFalse(isTriangleNumber 14)
+    Assert.IsTrue(isTriangleNumber 15)
+    Assert.IsFalse(isTriangleNumber 16)
+    
+    Assert.IsFalse(isTriangleNumber 20)
+    Assert.IsTrue(isTriangleNumber 21)
+    Assert.IsFalse(isTriangleNumber 22)
+    
+    Assert.IsFalse(isTriangleNumber 27)
+    Assert.IsTrue(isTriangleNumber 28)
+    Assert.IsFalse(isTriangleNumber 29)
+    
+    Assert.IsFalse(isTriangleNumber 35)
+    Assert.IsTrue(isTriangleNumber 36)
+    Assert.IsFalse(isTriangleNumber 37)
+    
+    Assert.IsFalse(isTriangleNumber 44)
+    Assert.IsTrue(isTriangleNumber 45)
+    Assert.IsFalse(isTriangleNumber 46)
+    
+    Assert.IsFalse(isTriangleNumber 54)
+    Assert.IsTrue(isTriangleNumber 55)
+    Assert.IsFalse(isTriangleNumber 56)
+    
+[<Test>]
+let triangleNumber () =
+    Assert.AreEqual(1, triangleNumber 1)
+    Assert.AreEqual(3, triangleNumber 2)
+    Assert.AreEqual(6, triangleNumber 3)
+    Assert.AreEqual(10, triangleNumber 4)
+    Assert.AreEqual(15, triangleNumber 5)
+    Assert.AreEqual(21, triangleNumber 6)
+    Assert.AreEqual(28, triangleNumber 7)
+    Assert.AreEqual(36, triangleNumber 8)
+    Assert.AreEqual(45, triangleNumber 9)
+    Assert.AreEqual(55, triangleNumber 10)

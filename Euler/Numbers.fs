@@ -53,9 +53,12 @@ let inline factors n =
     | _ -> seq { for i in GenericOne .. floorSqrt(n) do
                  if isDivisible n i then yield (i, n/i)}
 
-// TODO Make this generic.
+// TODO Make these generic.
 let inline isEven n = isDivisible n 2
 let inline isEven64 n = isDivisible n 2L
+
+let inline isOdd n = not (isEven n)
+let inline isOdd64 n = not (isEven64 n)
 
 let inline isDivisibleByAll n list =
     let rec isDivisibleByAll n list =
@@ -77,3 +80,25 @@ let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) 
     | _ -> s |> Seq.reduce (fun acc n -> acc*n)
     
 let isInteger (d:double) = d%1.=0.
+
+
+let isTriangleNumber t =
+    match t with
+    | i when i <= 0 -> false
+    | _ ->
+        // t = (1/2)*n*(n+1)
+        // 2*t = n*(n+1)
+        // 2*t = n^2 + n
+        // 0 = n^2 + n - 2*t
+        // 0 = ax^2 + bx + c, with a = b = 1, and c = -2t
+        // Using the quadratic formula, and dissalowing negative n,
+        // n = (-1 + sqrt(1 - 4*(-2*t)))/2
+        let tDouble = double t
+        let n = (-1. + sqrt(1. + 8.*tDouble))/2.
+        
+        // If n is an integer, then t is the nth triangle number
+        isInteger n
+
+/// Return the nth triangle number
+let triangleNumber n = (n*(n+1))/2
+let triangleNumbers = Seq.initInfinite triangleNumber
