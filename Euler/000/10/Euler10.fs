@@ -20,16 +20,7 @@ let main argv =
     //
     // On the other hand, I spent a ton of extra time on this because Euler.net doesn't handle
     // commas properly, so I'll call it a draw
-    //let primesBelow2000000 = Prime.rkPrimes.TakeWhile(fun p -> p < 2000000) |> Seq.map int64
-    //let sumOfPrimesBelow2000000 : int64 = Seq.sum primesBelow2000000
-    //let largestPrime : int64 = primesBelow2000000.Last()
-    //printfn $"The largest prime is {largestPrime:N0}"
-    //printf $"The sum of primes below 2,000,000 is {sumOfPrimesBelow2000000}"
-
-    // RK Using a prime sieve from Stack Overflow, I can do the same problem in 3s. Since I'm more
-    // interested in learning F# then math, and I've done a ton of dicking around with Prime sieves
-    // already, I'll use the SO algorithm where required
-    let primesBelow2000000 = Prime.soPrimes().TakeWhile(fun p -> p < 2000000L)
+    let primesBelow2000000 = Prime.rkPrimes.TakeWhile(fun p -> p < 2000000) |> Seq.map int64
     let sumOfPrimesBelow2000000 : int64 = Seq.sum primesBelow2000000
     let largestPrime : int64 = primesBelow2000000.Last()
     printfn $"The largest prime is {largestPrime:N0}"

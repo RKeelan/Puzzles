@@ -98,15 +98,8 @@ let nthPrime () =
     Assert.AreEqual(104743, Prime.nthPrime 10001)
 
 [<Test>]
-let unfaithfulPrimeSieve () =
+let naivePrimeSieve () =
     // Generate all primes within the table
     let primesList = Prime.naivePrimeSieve (greatestTestPrime + 1)
-    for i in 0 .. (primes.Length - 1) do
-        Assert.AreEqual(primes.[i], primesList.[i])
-
-[<Test>]
-let soPrimes () =
-    // Generate all primes within the table
-    let primesList = Seq.toList (Prime.soPrimes().Take primes.Length)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])
