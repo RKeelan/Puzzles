@@ -1,4 +1,4 @@
-﻿module Prime
+﻿module Primes
 
 open System.Linq
 open Numbers

@@ -47,7 +47,7 @@ let rec isTruncatablePrimeRec numbers dir =
     match numbers with
     | [] -> true
     | (head :: tail) ->
-        if Prime.isPrime head then isTruncatablePrimeRec tail dir
+        if Primes.isPrime head then isTruncatablePrimeRec tail dir
         else false
 
 

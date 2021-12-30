@@ -10,5 +10,5 @@ https://projecteuler.net/problem=7
 //[<EntryPoint>]
 let main argv =
     let n = 10001
-    printfn $"Prime #{n} = { Prime.nthPrime n}"
+    printfn $"Prime #{n} = { Primes.nthPrime n}"
     0

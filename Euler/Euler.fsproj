@@ -9,7 +9,7 @@
   <ItemGroup>
     <Compile Include="Util.fs" />
     <Compile Include="Numbers.fs" />
-    <Compile Include="Prime.fs" />
+    <Compile Include="Primes.fs" />
     <Compile Include="Time.fs" />
     <Compile Include="BigInt.fs" />
     <Compile Include="Strings.fs" />

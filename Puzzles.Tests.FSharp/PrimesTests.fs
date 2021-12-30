@@ -1,4 +1,4 @@
-﻿module Puzzles.Tests.FSharp.PrimeTests
+﻿module Puzzles.Tests.FSharp.PrimesTests
 
 open System.Linq
 open NUnit.Framework
@@ -66,12 +66,12 @@ let nonPrimes = exceptSorted [1 .. (greatestTestPrime+1)] primes
 [<Test>]
 let isPrimeTrue () =
     for p in primes do
-        Assert.IsTrue(Prime.isPrime p, $"{p} reported as not prime")
+        Assert.IsTrue(Primes.isPrime p, $"{p} reported as not prime")
 
 [<Test>]
 let isPrimeFalse () =
     for np in nonPrimes do
-        Assert.IsFalse(Prime.isPrime np, $"{np} reported as prime")
+        Assert.IsFalse(Primes.isPrime np, $"{np} reported as prime")
         
 [<Test>]
 let nextPrime () =
@@ -79,27 +79,27 @@ let nextPrime () =
         printfn $"Checking prime #{i} ({primes.[i]})"
         // The next prime after the value immediately preceding current prime should be the current
         // prime
-        Assert.AreEqual(primes.[i], Prime.nextPrime (primes.[i] - 1))
+        Assert.AreEqual(primes.[i], Primes.nextPrime (primes.[i] - 1))
 
         // The next prime after the current prime should be equal to the next prime in the list.
         // I use the prime itself rather than "prime + 1" because that logic
-        Assert.AreEqual(primes.[i+1], Prime.nextPrime primes.[i])
+        Assert.AreEqual(primes.[i+1], Primes.nextPrime primes.[i])
 
 [<Test>]
 let primesTest () =
-    let primesList = Seq.toList (Prime.rkPrimes.Take primes.Length)
+    let primesList = Seq.toList (Primes.rkPrimes.Take primes.Length)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])
 
 [<Test>]
 let nthPrime () =
     for i in 1 .. (primes.Length / 10) do
-        Assert.AreEqual(primes.[i-1], Prime.nthPrime i) // -1 because the primes list is zero-indexed
-    Assert.AreEqual(104743, Prime.nthPrime 10001)
+        Assert.AreEqual(primes.[i-1], Primes.nthPrime i) // -1 because the primes list is zero-indexed
+    Assert.AreEqual(104743, Primes.nthPrime 10001)
 
 [<Test>]
 let naivePrimeSieve () =
     // Generate all primes within the table
-    let primesList = Prime.naiveSieve (greatestTestPrime + 1)
+    let primesList = Primes.naiveSieve (greatestTestPrime + 1)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])

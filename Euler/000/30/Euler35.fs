@@ -15,7 +15,7 @@ open Strings
 
 let isCircularPrime n =
     let rotations = rotations (n.ToString()) |> Seq.toList |> Seq.map Int32.Parse |> Seq.toList
-    let primeRotations = rotations |> List.filter Prime.isPrime
+    let primeRotations = rotations |> List.filter Primes.isPrime
     rotations.Length = primeRotations.Length
 
 let circularPrimes n =
