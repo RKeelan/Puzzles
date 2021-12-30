@@ -36,14 +36,14 @@ let N = 999
 let evaluate a b n = n*n + a*n + b
 
 let consecutivePrimes a b =
-    if not (Prime.isPrime b) then 0 // If b isn't prime, this will trivially fail when n = 0
+    if not (Primes.isPrime b) then 0 // If b isn't prime, this will trivially fail when n = 0
     else
-        let length = Seq.initInfinite(fun i -> i-1) |> Seq.takeWhile (fun n -> Prime.isPrime (evaluate a b n)) |> Seq.length
+        let length = Seq.initInfinite(fun i -> i-1) |> Seq.takeWhile (fun n -> Primes.isPrime (evaluate a b n)) |> Seq.length
         // The length of the sequence will always be one greater than the number of primes found
         length - 1
 
 let searchForCoefficients =
-    let primesUnderN = Prime.naiveSieve (N+1)
+    let primesUnderN = Primes.naiveSieve (N+1)
     seq { for a in [0..N] do
             for b in primesUnderN do
                 yield (a, b, (consecutivePrimes a b))

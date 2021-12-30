@@ -33,7 +33,7 @@ let main argv =
     let candidates = numbers |> Seq.filter (fun n -> not (isEven64 n)) |> Seq.toList |> List.sortByDescending id
     //let odd = List.head candidates
     //printfn $"The largest odd pandigital number is {odd}"
-    let primes = candidates |> Seq.filter Prime.isPrime64
+    let primes = candidates |> Seq.filter Primes.isPrime64
     let largest = Seq.head primes
 
     //let primes = numbers |> Seq.filter (fun n -> not (Util.isEven64 n)) |> Seq.filter Prime.isPrime64

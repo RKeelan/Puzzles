@@ -59,6 +59,7 @@
     <Compile Include="000\40\Euler43.fs" />
     <Compile Include="000\40\Euler44.fs" />
     <Compile Include="000\40\Euler45.fs" />
+    <Compile Include="000\40\Euler46.fs" />
   </ItemGroup>
 
   <ItemGroup>

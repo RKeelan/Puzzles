@@ -54,3 +54,4 @@ let naiveSieve n =
         | head::tail -> head :: (sieve (List.filter (fun x -> x % head <> 0) tail))
         | [] -> []
     sieve (2::[3 .. 2 .. n])
+
