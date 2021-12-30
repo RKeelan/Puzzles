@@ -48,9 +48,9 @@ let rkPrimes =
 let rec nthPrime n = Seq.head(rkPrimes.Skip(n - 1))
 
 // From https://stackoverflow.com/questions/4629734/the-sieve-of-eratosthenes-in-f
-let naivePrimeSieve n =
+let naiveSieve n =
     let rec sieve list =
         match list with
-        | head::tail -> head :: (sieve <| List.filter (fun x -> x % head <> 0) tail)
+        | head::tail -> head :: (sieve (List.filter (fun x -> x % head <> 0) tail))
         | [] -> []
-    sieve [2 .. n]
+    sieve (2::[3 .. 2 .. n])

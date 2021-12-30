@@ -43,7 +43,7 @@ let consecutivePrimes a b =
         length - 1
 
 let searchForCoefficients =
-    let primesUnderN = Prime.naivePrimeSieve (N+1)
+    let primesUnderN = Prime.naiveSieve (N+1)
     seq { for a in [0..N] do
             for b in primesUnderN do
                 yield (a, b, (consecutivePrimes a b))
