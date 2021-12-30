@@ -133,6 +133,8 @@ let triangleNumber () =
     Assert.AreEqual(45, triangleNumber 9)
     Assert.AreEqual(55, triangleNumber 10)
     
+    Assert.AreEqual(40755, triangleNumber 285)
+    
 [<Test>]
 let isPentagonNumber () =
     Assert.IsFalse(isPentagonNumber 0)
@@ -187,3 +189,20 @@ let pentagonNumber () =
     Assert.AreEqual(92, pentagonNumber 8)
     Assert.AreEqual(117, pentagonNumber 9)
     Assert.AreEqual(145, pentagonNumber 10)
+    
+    Assert.AreEqual(40755, pentagonNumber 165)
+    
+[<Test>]
+let isHexagonNumber () =
+    Assert.IsFalse(isHexagonNumber 0)
+    Assert.IsTrue(isHexagonNumber 1)
+    Assert.IsFalse(isHexagonNumber 2)
+    
+    Assert.IsFalse(isHexagonNumber 40754)
+    Assert.IsTrue(isHexagonNumber 40755)
+    Assert.IsFalse(isHexagonNumber 40756)
+    
+[<Test>]
+let hexagonNumber () =
+    Assert.AreEqual(1, hexagonNumber 1)
+    Assert.AreEqual(40755, hexagonNumber 143)

@@ -118,8 +118,29 @@ let isPentagonNumber p =
         let pDouble = double p
         let n = (1. + sqrt(1. + 24.*pDouble))/6.
         
-        // If n is an integer, then t is the nth triangle number
+        // If n is an integer, then p is the nth triangle number
         isInteger n
 
 /// Return the nth pentagon number
 let pentagonNumber n = (n*(3*n-1))/2
+
+
+let isHexagonNumber h =
+    match h with
+    | z when z <= 0 -> false
+    | _ ->
+        // h = n*(2n-1)
+        // h = 2n^2 - n
+        // 0 = 2n^2 - n - h
+        // 0 = ax^2 + bx + c, with a = 2, b = -1, and c = -h
+        // Using the quadratic formula x = (-b +/- sqrt(b^2 - 4ac))/2a, and dissalowing negative n,
+        // n = (1 + sqrt(1 - 4*2*(-h)))/2*2
+        // n = (1 + sqrt(1 + 8*h))/4
+        let hDouble = double h
+        let n = (1. + sqrt(1. + 8.*hDouble))/4.
+        
+        // If n is an integer, then h is the nth triangle number
+        isInteger n
+
+
+let hexagonNumber n = n*(2*n-1)
