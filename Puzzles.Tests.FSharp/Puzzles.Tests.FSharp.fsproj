@@ -14,6 +14,7 @@
     <Compile Include="TimeTests.fs" />
     <Compile Include="BigIntTests.fs" />
     <Compile Include="StringsTests.fs" />
+    <Compile Include="SearchTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

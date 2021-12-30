@@ -13,6 +13,7 @@
     <Compile Include="Time.fs" />
     <Compile Include="BigInt.fs" />
     <Compile Include="Strings.fs" />
+    <Compile Include="Search.fs" />
     <Compile Include="000\0\Euler1.fs" />
     <Compile Include="000\0\Euler2.fs" />
     <Compile Include="000\0\Euler3.fs" />
