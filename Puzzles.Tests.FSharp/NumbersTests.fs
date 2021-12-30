@@ -132,3 +132,58 @@ let triangleNumber () =
     Assert.AreEqual(36, triangleNumber 8)
     Assert.AreEqual(45, triangleNumber 9)
     Assert.AreEqual(55, triangleNumber 10)
+    
+[<Test>]
+let isPentagonNumber () =
+    Assert.IsFalse(isPentagonNumber 0)
+    Assert.IsTrue(isPentagonNumber 1)
+    Assert.IsFalse(isPentagonNumber 2)
+    
+    Assert.IsFalse(isPentagonNumber 4)
+    Assert.IsTrue(isPentagonNumber 5)
+    Assert.IsFalse(isPentagonNumber 6)
+    
+    Assert.IsFalse(isPentagonNumber 11)
+    Assert.IsTrue(isPentagonNumber 12)
+    Assert.IsFalse(isPentagonNumber 13)
+    
+    Assert.IsFalse(isPentagonNumber 21)
+    Assert.IsTrue(isPentagonNumber 22)
+    Assert.IsFalse(isPentagonNumber 23)
+    
+    Assert.IsFalse(isPentagonNumber 34)
+    Assert.IsTrue(isPentagonNumber 35)
+    Assert.IsFalse(isPentagonNumber 36)
+    
+    Assert.IsFalse(isPentagonNumber 50)
+    Assert.IsTrue(isPentagonNumber 51)
+    Assert.IsFalse(isPentagonNumber 52)
+    
+    Assert.IsFalse(isPentagonNumber 69)
+    Assert.IsTrue(isPentagonNumber 70)
+    Assert.IsFalse(isPentagonNumber 71)
+    
+    Assert.IsFalse(isPentagonNumber 91)
+    Assert.IsTrue(isPentagonNumber 92)
+    Assert.IsFalse(isPentagonNumber 93)
+    
+    Assert.IsFalse(isPentagonNumber 116)
+    Assert.IsTrue(isPentagonNumber 117)
+    Assert.IsFalse(isPentagonNumber 118)
+    
+    Assert.IsFalse(isPentagonNumber 144)
+    Assert.IsTrue(isPentagonNumber 145)
+    Assert.IsFalse(isPentagonNumber 146)
+    
+[<Test>]
+let pentagonNumber () =
+    Assert.AreEqual(1, pentagonNumber 1)
+    Assert.AreEqual(5, pentagonNumber 2)
+    Assert.AreEqual(12, pentagonNumber 3)
+    Assert.AreEqual(22, pentagonNumber 4)
+    Assert.AreEqual(35, pentagonNumber 5)
+    Assert.AreEqual(51, pentagonNumber 6)
+    Assert.AreEqual(70, pentagonNumber 7)
+    Assert.AreEqual(92, pentagonNumber 8)
+    Assert.AreEqual(117, pentagonNumber 9)
+    Assert.AreEqual(145, pentagonNumber 10)

@@ -84,7 +84,7 @@ let isInteger (d:double) = d%1.=0.
 
 let isTriangleNumber t =
     match t with
-    | i when i <= 0 -> false
+    | z when z <= 0 -> false
     | _ ->
         // t = (1/2)*n*(n+1)
         // 2*t = n*(n+1)
@@ -102,3 +102,24 @@ let isTriangleNumber t =
 /// Return the nth triangle number
 let triangleNumber n = (n*(n+1))/2
 let triangleNumbers = Seq.initInfinite triangleNumber
+
+let isPentagonNumber p =
+    match p with
+    | z when z <= 0 -> false
+    | _ ->
+        // p = (n*(3n-1))/3
+        // 2*p = n*(3n-1)
+        // 2*p = 3n^2 - n
+        // 0 = 3n^2 - n - 2*p
+        // 0 = ax^2 + bx + c, with a = 3, b = -1, and c = -2p
+        // Using the quadratic formula x = (-b +/- sqrt(b^2 - 4ac))/2a, and dissalowing negative n,
+        // n = (1 + sqrt(1 - 4*3*(-2p)))/2*3
+        // n = 
+        let pDouble = double p
+        let n = (1. + sqrt(1. + 24.*pDouble))/6.
+        
+        // If n is an integer, then t is the nth triangle number
+        isInteger n
+
+/// Return the nth pentagon number
+let pentagonNumber n = (n*(3*n-1))/2
