@@ -48,13 +48,17 @@ let rkPrimes =
 
 let rec nthPrime n = Seq.head(rkPrimes.Skip(n - 1))
 
-// From https://stackoverflow.com/questions/4629734/the-sieve-of-eratosthenes-in-f
+// Return all primes up to n
 let naiveSieve n =
+    // From https://stackoverflow.com/questions/4629734/the-sieve-of-eratosthenes-in-f
     let rec sieve list =
         match list with
         | head::tail -> head :: (sieve (List.filter (fun x -> x % head <> 0) tail))
         | [] -> []
     sieve (2::[3 .. 2 .. n])
+
+// Return all primes between n and m inclusive
+let primesBetween n m = naiveSieve m |> List.filter (fun p -> p >= n)
 
 let factorize number =
     match number with

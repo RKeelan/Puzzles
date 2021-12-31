@@ -105,6 +105,16 @@ let naivePrimeSieve () =
         Assert.AreEqual(primes.[i], primesList.[i])
 
 [<Test>]
+let primesBetween () =
+    Assert.AreEqual([2;3], Primes.primesBetween 2 3)
+    Assert.AreEqual([11;13;17;19;23;29;31;37], Primes.primesBetween 11 37)
+    Assert.AreEqual([1009], Primes.primesBetween 1000 1010)
+
+    let expectedPrimes = primes |> List.filter (fun p -> p.ToString().Length = 3)
+    let actualPrimes = Primes.primesBetween 100 999
+    Assert.AreEqual(expectedPrimes, actualPrimes)
+
+[<Test>]
 let factorize () =
     Assert.AreEqual(([]:int list), Primes.factorize 1)
     Assert.AreEqual([2], Primes.factorize 2)
