@@ -2,6 +2,16 @@
 
 open System
 
+// Unchecked Operators ----------------------------------------------------------------------------
+
+let inline ( +! ) x y = Microsoft.FSharp.Core.Operators.(+) x y
+let inline ( *! ) x y = Microsoft.FSharp.Core.Operators.(*) x y
+
+// Modular Arithmetic -----------------------------------------------------------------------------
+
+let inline modAdd x y modulus = (x + y) % modulus
+let inline modMul x y modulus = (x * y) % modulus
+
 // Tuple Helpers ----------------------------------------------------------------------------------
 
 let firstOf3 (a, _, _) = a
