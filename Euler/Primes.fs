@@ -1,5 +1,6 @@
 ﻿module Primes
 
+open System
 open System.Linq
 open Numbers
 
@@ -55,3 +56,43 @@ let naiveSieve n =
         | [] -> []
     sieve (2::[3 .. 2 .. n])
 
+let factorize number =
+    match number with
+    | z when z < 0 -> raise(ArgumentException("I'm not sure if and how to handle negative numbers"))
+    | 0 -> raise(ArgumentException("I'm not sure how to factorize 0"))
+    | 1 -> []
+    | _ ->
+        //wheel = [|2;3;5|]
+        let inc = [|4;2;4;2;4;6;2;6|]
+    
+        //let rec getFactors n f =
+        //    if isDivisible n f
+        //    then f :: getFactors (n/f) f
+        //    else []
+
+        let mutable factors = []
+        let mutable n = number
+    
+        while isDivisible n 2 do
+            factors <- 2 :: factors
+            n <- n/2
+        
+        while isDivisible n 3 do
+            factors <- 3 :: factors
+            n <- n/3
+        
+        while isDivisible n 5 do
+            factors <- 5 :: factors
+            n <- n/5
+
+        let mutable k = 7
+        let mutable i = 0
+        while (k*k) <= n do
+            if isDivisible n k then
+                factors <- k :: factors
+                n <- n / k
+            else
+                k <- k + inc.[i]
+                i <- (i + 1) % inc.Length
+        if n > 1 then do factors <- n :: factors
+        factors

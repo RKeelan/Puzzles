@@ -103,3 +103,24 @@ let naivePrimeSieve () =
     let primesList = Primes.naiveSieve (greatestTestPrime + 1)
     for i in 0 .. (primes.Length - 1) do
         Assert.AreEqual(primes.[i], primesList.[i])
+
+[<Test>]
+let factorize () =
+    Assert.AreEqual(([]:int list), Primes.factorize 1)
+    Assert.AreEqual([2], Primes.factorize 2)
+    Assert.AreEqual([3], Primes.factorize 3)
+    Assert.AreEqual([2;2], Primes.factorize 4)
+    Assert.AreEqual([5], Primes.factorize 5)
+    Assert.AreEqual([3;2], Primes.factorize 6)
+    Assert.AreEqual([7], Primes.factorize 7)
+    Assert.AreEqual([2;2;2], Primes.factorize 8)
+    Assert.AreEqual([3;3], Primes.factorize 9)
+
+    Assert.AreEqual([7;2], Primes.factorize 14)
+    Assert.AreEqual([5;3], Primes.factorize 15)
+
+    Assert.AreEqual([11;2], Primes.factorize 22)
+
+    Assert.AreEqual([23;7;2;2], Primes.factorize 644)
+    Assert.AreEqual([43;5;3], Primes.factorize 645)
+    Assert.AreEqual([19;17;2], Primes.factorize 646)
