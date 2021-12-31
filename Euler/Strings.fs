@@ -30,6 +30,17 @@ let isPandigital (s:string) d = not(s.Contains('0')) && (s.Length = d) && (not (
 
 // Permutations -----------------------------------------------------------------------------------
 
+/// Returns true if s1 and s2 are permutations of each other (but false if they're the same string)
+let isPermutation (s1:string) (s2:string) : bool =
+    // RK 31-Dec-2021: I think that in most cases, I won't want to consider "s" a permutation of
+    // itself
+    if s1 = s2 then false
+    else
+        let sortString (s:string) = new string(s.ToCharArray() |> Array.sort)
+        let sortedS1 = sortString s1
+        let sortedS2 = sortString s2
+        sortedS1 = sortedS2
+
 let lexicographicPermutations (s:string) : list<string> =
     let chars = s.ToCharArray()
     Array.Sort chars
