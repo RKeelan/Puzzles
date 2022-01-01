@@ -41,12 +41,12 @@ let nextPrime start =
         let candidates = Seq.initInfinite (fun n -> n*2 + sequenceStart)
         Seq.head (candidates |> Seq.filter (fun n -> isPrime n))
 
-let rkPrimes =
+let primes =
     2 // First prime
     |> Seq.unfold (fun state -> Some(state, nextPrime state))
     
 
-let rec nthPrime n = Seq.head(rkPrimes.Skip(n - 1))
+let rec nthPrime n = Seq.head(primes.Skip(n - 1))
 
 // Return all primes up to n
 let naiveSieve n =

@@ -4,7 +4,7 @@ open System.Linq
 open NUnit.Framework
 open Util
 
-let primes = Array.toList [|
+let referencePrimes = Array.toList [|
     2;3;5;7;11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;
     73;79;83;89;97;101;103;107;109;113;127;131;137;139;149;151;157;163;167;173;
     179;181;191;193;197;199;211;223;227;229;233;239;241;251;257;263;269;271;277;281;
@@ -57,15 +57,15 @@ let primes = Array.toList [|
     7727;7741;7753;7757;7759;7789;7793;7817;7823;7829;7841;7853;7867;7873;7877;7879;7883;7901;7907;7919
 |]
 
-let greatestTestPrime = primes.[(primes.Length-1)]
+let greatestTestPrime = referencePrimes.[(referencePrimes.Length-1)]
 
 // This ugly expression enumerates from 1 up to the next number greater than the last prime in my
 // test set
-let nonPrimes = exceptSorted [1 .. (greatestTestPrime+1)] primes
+let nonPrimes = exceptSorted [1 .. (greatestTestPrime+1)] referencePrimes
 
 [<Test>]
 let isPrimeTrue () =
-    for p in primes do
+    for p in referencePrimes do
         Assert.IsTrue(Primes.isPrime p, $"{p} reported as not prime")
 
 [<Test>]
@@ -75,34 +75,34 @@ let isPrimeFalse () =
         
 [<Test>]
 let nextPrime () =
-    for i in 0 .. (primes.Length - 2) do
-        printfn $"Checking prime #{i} ({primes.[i]})"
+    for i in 0 .. (referencePrimes.Length - 2) do
+        printfn $"Checking prime #{i} ({referencePrimes.[i]})"
         // The next prime after the value immediately preceding current prime should be the current
         // prime
-        Assert.AreEqual(primes.[i], Primes.nextPrime (primes.[i] - 1))
+        Assert.AreEqual(referencePrimes.[i], Primes.nextPrime (referencePrimes.[i] - 1))
 
         // The next prime after the current prime should be equal to the next prime in the list.
         // I use the prime itself rather than "prime + 1" because that logic
-        Assert.AreEqual(primes.[i+1], Primes.nextPrime primes.[i])
+        Assert.AreEqual(referencePrimes.[i+1], Primes.nextPrime referencePrimes.[i])
 
 [<Test>]
 let primesTest () =
-    let primesList = Seq.toList (Primes.rkPrimes.Take primes.Length)
-    for i in 0 .. (primes.Length - 1) do
-        Assert.AreEqual(primes.[i], primesList.[i])
+    let primesList = Seq.toList (Primes.primes.Take referencePrimes.Length)
+    for i in 0 .. (referencePrimes.Length - 1) do
+        Assert.AreEqual(referencePrimes.[i], primesList.[i])
 
 [<Test>]
 let nthPrime () =
-    for i in 1 .. (primes.Length / 10) do
-        Assert.AreEqual(primes.[i-1], Primes.nthPrime i) // -1 because the primes list is zero-indexed
+    for i in 1 .. (referencePrimes.Length / 10) do
+        Assert.AreEqual(referencePrimes.[i-1], Primes.nthPrime i) // -1 because the primes list is zero-indexed
     Assert.AreEqual(104743, Primes.nthPrime 10001)
 
 [<Test>]
 let naivePrimeSieve () =
     // Generate all primes within the table
     let primesList = Primes.naiveSieve (greatestTestPrime + 1)
-    for i in 0 .. (primes.Length - 1) do
-        Assert.AreEqual(primes.[i], primesList.[i])
+    for i in 0 .. (referencePrimes.Length - 1) do
+        Assert.AreEqual(referencePrimes.[i], primesList.[i])
 
 [<Test>]
 let primesBetween () =
@@ -110,7 +110,7 @@ let primesBetween () =
     Assert.AreEqual([11;13;17;19;23;29;31;37], Primes.primesBetween 11 37)
     Assert.AreEqual([1009], Primes.primesBetween 1000 1010)
 
-    let expectedPrimes = primes |> List.filter (fun p -> p.ToString().Length = 3)
+    let expectedPrimes = referencePrimes |> List.filter (fun p -> p.ToString().Length = 3)
     let actualPrimes = Primes.primesBetween 100 999
     Assert.AreEqual(expectedPrimes, actualPrimes)
 

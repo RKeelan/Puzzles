@@ -10,7 +10,7 @@ open System.Linq
 
 //[<EntryPoint>]
 let main argv =
-    let primesBelow10 = Primes.rkPrimes.TakeWhile(fun p -> p < 10)
+    let primesBelow10 = Primes.primes.TakeWhile(fun p -> p < 10)
     let sumOfPrimesBelow10 = Seq.sum primesBelow10
     printfn $"The sum of primes below 10 is {sumOfPrimesBelow10}"
     
@@ -20,7 +20,7 @@ let main argv =
     //
     // On the other hand, I spent a ton of extra time on this because Euler.net doesn't handle
     // commas properly, so I'll call it a draw
-    let primesBelow2000000 = Primes.rkPrimes.TakeWhile(fun p -> p < 2000000) |> Seq.map int64
+    let primesBelow2000000 = Primes.primes.TakeWhile(fun p -> p < 2000000) |> Seq.map int64
     let sumOfPrimesBelow2000000 : int64 = Seq.sum primesBelow2000000
     let largestPrime : int64 = primesBelow2000000.Last()
     printfn $"The largest prime is {largestPrime:N0}"
