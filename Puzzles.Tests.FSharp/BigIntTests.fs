@@ -4,7 +4,7 @@ open NUnit.Framework
 open BigInt
 
 let rec double (number : BigInt) (n : int64) =
-    let numberDoubled = number.multiply(2L)
+    let numberDoubled = number * 2L
     match n with
     | 1L -> numberDoubled
     | _ -> double numberDoubled (n - 1L)
@@ -113,7 +113,7 @@ let add () =
 [<Test>]
 let multiply () =
     let mutable bigInt = BigInt(6L, 10L)
-    bigInt <- bigInt.multiply(2L)
+    bigInt <- bigInt * 2L
     Assert.AreEqual("12", bigInt.ToString())
     
     let bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
