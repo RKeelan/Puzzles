@@ -1,6 +1,7 @@
 ﻿module Util
 
 open System
+open LanguagePrimitives
 
 // Unchecked Operators ----------------------------------------------------------------------------
 
@@ -19,6 +20,11 @@ let secondOf3 (_, b, _) = b
 let thirdOf3 (_, _, c) = c
 
 // Miscellaenous ----------------------------------------------------------------------------------
+
+let inline product(s : seq<'a> when (^a) : (static member (*) : ^a * ^a -> ^a)) =
+    match s with
+    | sequence when Seq.isEmpty sequence -> GenericZero
+    | _ -> s |> Seq.reduce (fun acc n -> acc*n)
 
 let printArray (row : 'a[]) = printfn "%s" (String.Join(" ", row))
 

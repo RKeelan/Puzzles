@@ -36,6 +36,7 @@ are zeros, and that's actually kind of true
 *)
 
 open System
+open Util
 open Numbers
 
 let fractions =

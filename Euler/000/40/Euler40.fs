@@ -20,7 +20,7 @@ https://projecteuler.net/problem=40
 
 open System
 open System.Collections.Generic
-open Numbers
+open Util
 
 let champernownesDigits = seq {for i in 1..Int32.MaxValue do yield! i.ToString().ToCharArray() }
 

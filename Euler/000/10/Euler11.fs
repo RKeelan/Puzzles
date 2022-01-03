@@ -38,7 +38,7 @@ calculate the horizontal, vertical, and diagonal product, and add all three to a
 At the end, find the largest number
 *)
 
-open Numbers
+open Util
 
 [<Literal>]
 let NUM_ELEMENTS = 4
