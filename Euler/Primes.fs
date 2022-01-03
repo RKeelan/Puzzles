@@ -16,6 +16,8 @@ let isPrime p =
         //printfn "%A" divisors
         not (isDivisibleByAny p divisors)
 
+let isPrimeFast primeTable p = Set.contains p primeTable
+
 let isPrime64 p =
     match p with
     // RK 21-Dec-2021: Based on the answer to Euler #27, Project Euler doesn't consider negative
@@ -50,12 +52,13 @@ let rec nthPrime n = Seq.head(primes.Skip(n - 1))
 
 // Return all primes up to n
 let naiveSieve n =
-    // From https://stackoverflow.com/questions/4629734/the-sieve-of-eratosthenes-in-f
-    let rec sieve list =
+    let rec sieve list acc =
         match list with
-        | head::tail -> head :: (sieve (List.filter (fun x -> x % head <> 0) tail))
-        | [] -> []
-    sieve (2::[3 .. 2 .. n])
+        | head::tail ->
+            let sievedTail = tail |> List.filter (fun x -> not (isDivisible x head)) 
+            sieve sievedTail (head::acc)
+        | [] -> List.rev acc
+    sieve (2::[3 .. 2 .. n]) []
 
 // Return all primes between n and m inclusive
 let primesBetween n m = naiveSieve m |> List.filter (fun p -> p >= n)
@@ -68,11 +71,6 @@ let factorize number =
     | _ ->
         //wheel = [|2;3;5|]
         let inc = [|4;2;4;2;4;6;2;6|]
-    
-        //let rec getFactors n f =
-        //    if isDivisible n f
-        //    then f :: getFactors (n/f) f
-        //    else []
 
         let mutable factors = []
         let mutable n = number
