@@ -5,6 +5,38 @@ open Util
 open Numbers
 
 [<Test>]
+let numDigits () =
+    Assert.AreEqual(1, Numbers.numDigits 0)
+    Assert.AreEqual(1, Numbers.numDigits 9)
+
+    Assert.AreEqual(2, Numbers.numDigits 10)
+    Assert.AreEqual(2, Numbers.numDigits 19)
+
+    Assert.AreEqual(3, Numbers.numDigits 100)
+    Assert.AreEqual(3, Numbers.numDigits 999)
+
+    Assert.AreEqual(4, Numbers.numDigits 1000)
+    Assert.AreEqual(4, Numbers.numDigits 9999)
+
+    Assert.AreEqual(5, Numbers.numDigits 10000)
+    Assert.AreEqual(5, Numbers.numDigits 99999)
+
+    Assert.AreEqual(6, Numbers.numDigits 100000)
+    Assert.AreEqual(6, Numbers.numDigits 999999)
+
+    Assert.AreEqual(7, Numbers.numDigits 1000000)
+    Assert.AreEqual(7, Numbers.numDigits 9999999)
+
+    Assert.AreEqual(8, Numbers.numDigits 10000000)
+    Assert.AreEqual(8, Numbers.numDigits 99999999)
+
+    Assert.AreEqual(9, Numbers.numDigits 100000000)
+    Assert.AreEqual(9, Numbers.numDigits 999999999)
+
+    Assert.AreEqual(10, Numbers.numDigits 1000000000)
+    Assert.AreEqual(10, Numbers.numDigits 2000000000)
+
+[<Test>]
 let lowestMultiple () =
     Assert.AreEqual((2, 2), (lowestMultiple 1 2))
     Assert.AreEqual((2, 1), (lowestMultiple 2 3))
@@ -24,6 +56,13 @@ let summands () =
     Assert.AreEqual(seq { (0,2); (1,1)}, summands 2)
     Assert.AreEqual(seq { (0,3); (1,2)}, summands 3)
     Assert.AreEqual(seq { (0,4); (1,3); (2,2)}, summands 4)
+
+[<Test>]
+let isDivisible () =
+    Assert.IsTrue(isDivisible 1 1)
+    Assert.IsTrue(isDivisible 4 2)
+    Assert.IsTrue(isDivisible 6 3)
+    Assert.IsTrue(isDivisible 10 2)
 
 [<Test>]
 let divisors () =

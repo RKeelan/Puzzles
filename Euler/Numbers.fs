@@ -2,6 +2,20 @@
 
 open LanguagePrimitives
 
+let numDigits n =
+    match n with
+    | 0 -> 1
+    | m when m < 10 -> 1
+    | m when m < 100 -> 2
+    | m when m < 1000 -> 3
+    | m when m < 10000 -> 4
+    | m when m < 100000 -> 5
+    | m when m < 1000000 -> 6
+    | m when m < 10000000 -> 7
+    | m when m < 100000000 -> 8
+    | m when m < 1000000000 -> 9
+    | _ -> 10 // RK 01-Jan-2021: This works because this function only works for int32s
+
 // Return the lowest multiple of x that's less than or equal to y, and the factor that produced it
 let inline lowestMultiple x y =
     let mutable result = GenericZero
@@ -27,16 +41,12 @@ let inline floorSqrt n = int (floor (sqrt (float n)))
 
 /// Rerturns true is n is divisible by d
 let inline isDivisible n d = ((n % d) = GenericZero)
-
-let inline divisorsNaive n =
-    seq { for i in GenericOne .. n -> i }
-    |> Seq.filter (fun i -> isDivisible n i)
     
-// TODO Make this generic.
+// TODO Make this generic
+// The problem is floorSqrt
 let inline divisors n =
     match n with
-    | 1 -> seq { 1 }
-    | 2 -> seq { 1; 2 }
+    | m when m = GenericOne -> seq { GenericOne }
     | _ -> seq { for i in GenericOne .. floorSqrt(n) do
                  if isDivisible n i then
                     let divisor = i
