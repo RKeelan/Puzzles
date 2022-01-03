@@ -62,4 +62,4 @@ let lexicographicPermutations (s:string) : list<string> =
             chars.[l] <- c
             Array.Reverse(chars, (k+1), (chars.Length - 1 - k))
             result <- (new string(chars)) :: result
-    result |> List.rev 
+    result |> List.rev
