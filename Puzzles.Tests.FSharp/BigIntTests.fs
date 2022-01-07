@@ -111,7 +111,7 @@ let add () =
     Assert.AreEqual("123456798", c.ToString())
 
 [<Test>]
-let multiply () =
+let multiplyScalar () =
     let mutable bigInt = BigInt(6L, 10L)
     bigInt <- bigInt * 2L
     Assert.AreEqual("12", bigInt.ToString())
@@ -122,4 +122,27 @@ let multiply () =
                     "985748039345677748242309854210746050623711418779541821530464749835819412673" +
                     "98767559165543946077062914571196477686542167660429831652624386837205668069376"
     Assert.AreEqual(bigResult, bigInt.ToString())
+
+[<Test>]
+let multiplyBigInt () =
+    let mutable a = BigInt(3L, 10L)
+    let mutable b = BigInt(2L, 10L)
+    let mutable expected = BigInt(6L, 10L)
+    Assert.AreEqual(expected, a*b)
+    
+    let mutable a = BigInt(6L, 10L)
+    let mutable b = BigInt(2L, 10L)
+    let mutable expected = BigInt(12L, 10L)
+    Assert.AreEqual(expected, a*b)
+    
+    let mutable a = BigInt(12L, 10L)
+    let mutable b = BigInt(12L, 10L)
+    let mutable expected = BigInt(144L, 10L)
+    Assert.AreEqual(expected, a*b)
+    
+    let mutable a = BigInt(8000000L, BigInt.INT_32_RADIX)
+    let mutable b = BigInt(8000000L, BigInt.INT_32_RADIX)
+    let mutable expected = BigInt(64000000000000L, BigInt.INT_32_RADIX)
+    Assert.AreEqual(expected, a*b)
+
 

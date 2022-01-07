@@ -25,6 +25,15 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
     member self.Radix = radix
     member self.Components = components
 
+    override self.Equals(otherObj:obj) = 
+        match otherObj with
+        | :? BigInt as other -> (self.Components = other.Components) && (self.Radix = other.Radix)
+        | _ -> false
+    override self.GetHashCode() =
+        let mutable hash = self.Radix.GetHashCode()
+        hash <- hash * 23 + self.Components.GetHashCode()
+        hash
+
     override this.ToString() =
         match List.rev(components) with
         | [] -> ""
@@ -79,7 +88,7 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
         
     // Multiplication -----------------------------------------------------------------------------
     
-    static member private multiplyRec
+    static member private multiplyScalar
         (multiplicand : list<int64>)
         (multiplier : int64)
         (radix : int64)
@@ -95,11 +104,36 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
                     (head * multiplier + carryOver) % radix
                 else (head * multiplier + carryOver)
             let newCarryOver = (head * multiplier) / radix
-            newHead :: (BigInt.multiplyRec tail multiplier radix newCarryOver)
-
+            newHead :: (BigInt.multiplyScalar tail multiplier radix newCarryOver)
+                
+    static member (*) (a:int64, b:BigInt) : BigInt =
+        let cComponents = BigInt.multiplyScalar b.Components a b.Radix 0L
+        new BigInt(cComponents,b.Radix)
+                
     static member (*) (a:BigInt, b:int64) : BigInt =
-        let cComponents = BigInt.multiplyRec a.Components b a.Radix 0L
+        let cComponents = BigInt.multiplyScalar a.Components b a.Radix 0L
         new BigInt(cComponents,a.Radix)
+
+    static member private multiplyBigInt
+        (multiplicand : BigInt)
+        (multiplier : list<int64>)
+        (acc : BigInt)
+        : BigInt =
+        match multiplier with
+        | [] -> acc
+        | head::tail ->
+            // This performs multiplication step where you multiply one digit by every digit in the
+            // other number
+            let acc = acc + (head * multiplicand)
+            // This performs the step where, the the next digit is shifted left. (Head is less 
+            // significant and tail is more significant.)
+            let multiplicand = multiplicand * multiplicand.Radix
+            BigInt.multiplyBigInt multiplicand tail acc
+            
+    static member (*) (a:BigInt, b:BigInt) : BigInt =
+        BigInt.multiplyBigInt a b.Components (BigInt(0L, a.Radix))
+
+    // Factorial ----------------------------------------------------------------------------------
 
 // Static Functions -------------------------------------------------------------------------------
 
