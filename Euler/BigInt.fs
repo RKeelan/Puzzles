@@ -22,6 +22,8 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
         if List.isEmpty initialComponents then BigInt([0L], radix)
         else BigInt(initialComponents, radix)
         
+    new(initialValue : int64) = new BigInt(initialValue, INT_32_RADIX)
+        
     member self.Radix = radix
     member self.Components = components
 
@@ -214,18 +216,24 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
         : (BigInt*BigInt) =
         if dividend.Radix <> divisor.Radix then do
             raise(ArgumentException("Both operands need the same radix"))
-
-        if divisor = (BigInt.zero divisor.Radix) then do
+        let radix = dividend.Radix
+        if divisor = (BigInt.zero radix) then do
             raise(DivideByZeroException("Divisor was 0"))
 
-        let mutable quotient = BigInt.zero(dividend.Radix)
-        let mutable remainder = dividend
+        let (quotientList, remainder) =
+            (dividend.Components, BigInt.zero radix)
+            ||> List.mapFoldBack (fun n r ->
+                let mutable r = (r * radix) + n
+                let mutable q = 0L
+                while r >= divisor do
+                    r <- r - divisor
+                    q <- q + 1L
+                (q,r)
+        )
 
-        while remainder >= divisor do
-            remainder <- remainder - divisor
-            quotient <- quotient + 1L
-
+        let quotient = new BigInt(quotientList, radix)
         ((BigInt.trim quotient), (BigInt.trim remainder))
+            
 
     static member (/) (a:BigInt, b:BigInt) = BigInt.divideBigInt a b
 
@@ -233,6 +241,6 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
 let rec bigFactorial n : BigInt =
     match n with
-    | 0L -> new BigInt(0L, INT_32_RADIX)
-    | 1L -> new BigInt(1L, INT_32_RADIX)
+    | 0L -> new BigInt(0L)
+    | 1L -> new BigInt(1L)
     | _ -> (bigFactorial (n - 1L)) * n
