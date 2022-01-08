@@ -127,6 +127,20 @@ let sumOfDigits () =
     Assert.AreEqual(648, bigInt.sumOfDigits())
 
 [<Test>]
+let scalar () =
+    let mutable a = new BigInt(3L, 10L)
+    Assert.AreEqual(Some(3L), (BigInt.scalar a))
+    
+    a <- new BigInt(33L, 10L)
+    Assert.AreEqual(Some(33L), (BigInt.scalar a))
+    
+    a <- new BigInt(3L, 100L)
+    Assert.AreEqual(Some(3L), (BigInt.scalar a))
+
+    a <- double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
+    Assert.AreEqual(None, (BigInt.scalar a))
+
+[<Test>]
 let add () =
     let mutable a = new BigInt(6L, 10L)
     let mutable b = new BigInt(5L, 10L)

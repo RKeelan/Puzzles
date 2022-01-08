@@ -62,13 +62,19 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
             acc + Int64.Parse(c.ToString())) 0L
 
     // Miscellaneous Static Members ---------------------------------------------------------------
-            
-    static member zero radix = new BigInt(0, radix)
-            
+    
     static member private trim (components : list<int64>) =
         let index = components |> List.tryFindIndexBack (fun n -> n <> 0)
         if index.IsNone then components
         else List.take (index.Value + 1) components
+            
+    static member zero radix = new BigInt(0, radix)
+
+    static member scalar (bigInt:BigInt) : Option<Int64> =
+        try
+            Some(bigInt.Components |> List.mapi (fun i n -> n * (pown bigInt.Radix i)) |> List.sum)
+        with
+            | _ -> None
         
     // Addition -----------------------------------------------------------------------------------
 
