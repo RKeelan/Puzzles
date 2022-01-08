@@ -63,10 +63,12 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
     // Miscellaneous Static Members ---------------------------------------------------------------
     
-    static member private trim (components : list<int64>) =
-        let index = components |> List.tryFindIndexBack (fun n -> n <> 0)
-        if index.IsNone then components
-        else List.take (index.Value + 1) components
+    static member private trim (bigInt : BigInt) =
+        let index = bigInt.Components |> List.tryFindIndexBack (fun n -> n <> 0)
+        if index.IsNone then BigInt.zero bigInt.Radix
+        else 
+            let components = List.take (index.Value + 1) bigInt.Components
+            new BigInt(components, bigInt.Radix)
             
     static member zero radix = new BigInt(0, radix)
 
@@ -154,8 +156,7 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
     static member (-) (a:BigInt, b:BigInt) : BigInt =
         if a.Radix <> b.Radix then do raise(ArgumentException("Both operands need the same radix"))
         let components = BigInt.subRec a.Components b.Components a.Radix false
-        let trimmedComponents = BigInt.trim components
-        new BigInt(trimmedComponents, a.Radix)
+        BigInt.trim (new BigInt(components, a.Radix))
         
     // Multiplication -----------------------------------------------------------------------------
     
