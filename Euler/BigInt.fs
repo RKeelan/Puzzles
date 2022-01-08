@@ -25,24 +25,45 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
     member self.Radix = radix
     member self.Components = components
 
-    override self.Equals(otherObj:obj) = 
-        match otherObj with
-        | :? BigInt as other -> (self.Components = other.Components) && (self.Radix = other.Radix)
-        | _ -> false
-    override self.GetHashCode() =
-        let mutable hash = self.Radix.GetHashCode()
-        hash <- hash * 23 + self.Components.GetHashCode()
-        hash
-
+    // Object Overrides ---------------------------------------------------------------------------
+    
     override this.ToString() =
         match List.rev(components) with
         | [] -> ""
         | head :: [] -> head.ToString()
         | head :: tail -> head.ToString() + String.Join("", tail |> List.map (fun n -> n.ToString(formatString)))
 
+    override self.Equals(otherObj:obj) = 
+        match otherObj with
+        | :? BigInt as other -> (self.Components = other.Components) && (self.Radix = other.Radix)
+        | _ -> false
+    
+    override self.GetHashCode() =
+        let mutable hash = self.Radix.GetHashCode()
+        hash <- hash * 23 + self.Components.GetHashCode()
+        hash
+        
+    // Comparison ---------------------------------------------------------------------------------
+
+    interface IComparable with
+        member this.CompareTo(otherObj) =
+            match otherObj with
+            | :? BigInt as other ->
+                if this.Radix <> other.Radix then do raise <| ArgumentException("Can't compare instances of different radices")
+                let lengthComparison = compare (List.length this.Components) (List.length other.Components)
+                if lengthComparison <> 0 then lengthComparison
+                else compare (List.rev this.Components) (List.rev other.Components)
+            | _ -> raise <| ArgumentException("Can't compare instances of different types")
+        
+    // Miscellaneous Members ----------------------------------------------------------------------
+
     member this.sumOfDigits () : int64 =
         this.ToString().ToCharArray() |> Array.fold (fun (acc:int64) (c:char) ->
             acc + Int64.Parse(c.ToString())) 0L
+
+    // Miscellaneous Static Members ---------------------------------------------------------------
+            
+    static member zero radix = new BigInt(0, radix)
             
     static member private trim (components : list<int64>) =
         let index = components |> List.tryFindIndexBack (fun n -> n <> 0)
@@ -175,6 +196,7 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
             BigInt.multiplyBigInt multiplicand tail acc
             
     static member (*) (a:BigInt, b:BigInt) : BigInt =
+        if a.Radix <> b.Radix then do raise(ArgumentException("Both operands need the same radix"))
         BigInt.multiplyBigInt a b.Components (BigInt(0L, a.Radix))
 
     // Factorial ----------------------------------------------------------------------------------

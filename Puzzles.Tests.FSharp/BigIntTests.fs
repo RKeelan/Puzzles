@@ -86,6 +86,39 @@ let toString () =
     Assert.AreEqual("1000000000000000001", bigInt.ToString())
 
 [<Test>]
+let comparison () =
+    let mutable a = new BigInt(1,10)
+    let mutable b = new BigInt(1,100)
+    Assert.Throws<System.ArgumentException>(fun () -> (compare a b) |> ignore) |> ignore
+
+    a <- new BigInt(1,10)
+    b <- new BigInt(1,10)
+    Assert.AreEqual(0, (compare a b))
+    Assert.IsTrue(a >= b)
+    Assert.IsTrue(a <= b)
+    
+    a <- new BigInt(2,10)
+    b <- new BigInt(1,10)
+    Assert.AreEqual(1, (compare a b))
+    
+    a <- new BigInt(1,10)
+    b <- new BigInt(2,10)
+    Assert.AreEqual(-1, (compare a b))
+    
+    a <- new BigInt(11,10)
+    b <- new BigInt(9,10)
+    Assert.AreEqual(1, (compare a b))
+    
+    a <- new BigInt(91,10)
+    b <- new BigInt(19,10)
+    Assert.AreEqual(1, (compare a b))
+
+    Assert.IsTrue(a > b)
+    Assert.IsTrue(a >= b)
+    Assert.IsFalse(a < b)
+    Assert.IsFalse(a <= b)
+
+[<Test>]
 let sumOfDigits () =
     let mutable bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
     Assert.AreEqual(1366, bigInt.sumOfDigits())
