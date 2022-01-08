@@ -17,10 +17,10 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
     new(initialValue : int64, radix : int64) =
         let initialComponents:list<int64> = initialValue |> List.unfold (fun n ->
-            if n = 0L then
-                None
+            if n = 0L then None
             else Some((n % radix), (n/radix)))
-        BigInt(initialComponents, radix)
+        if List.isEmpty initialComponents then BigInt([0L], radix)
+        else BigInt(initialComponents, radix)
         
     member self.Radix = radix
     member self.Components = components

@@ -11,7 +11,10 @@ let rec double (number : BigInt) (n : int64) =
 
 [<Test>]
 let ctor () =
-    let mutable bigInt = BigInt(1L, 10L)
+    let mutable bigInt = BigInt(0L, 10L)
+    Assert.AreEqual("0", bigInt.ToString())
+
+    bigInt <- BigInt(1L, 10L)
     Assert.AreEqual("1", bigInt.ToString())
 
     bigInt <- BigInt(11L, 10L)
