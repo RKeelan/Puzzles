@@ -15,14 +15,14 @@ open BigInt
 //[<EntryPoint>]
 let main argv =
     let n = 10L
-    let test = BigInt.factorial n
+    let test = BigInt.bigFactorial n
     printfn $"{n}! is {test}"
     printfn $"The sum of the digits of {n}! is {test.sumOfDigits()}"
     
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 
     let N = 100L
-    let bigInt = BigInt.factorial N
+    let bigInt = BigInt.bigFactorial N
     printfn $"{N}! is {bigInt}"
     printfn $"The sum of the digits of {N}! is {bigInt.sumOfDigits()}"
 

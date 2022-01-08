@@ -278,58 +278,71 @@ let multiplyBigInt () =
     let mutable expected = BigInt(64000000000000L, BigInt.INT_32_RADIX)
     Assert.AreEqual(expected, a*b)
 
+    let mutable a = BigInt.bigFactorial(10)
+    let mutable b = BigInt.bigFactorial(23L - 10L)
+    let mutable expected = BigInt(22596613079040000L, BigInt.INT_32_RADIX)
+    Assert.AreEqual(expected, a*b)
+
 [<Test>]
 let division () =
     let mutable a = BigInt(5L, 10L)
     let mutable b = BigInt(1L, 10L)
     let mutable expectedQuotient = BigInt(5L,10L)
     let mutable expectedRemainder = BigInt(0L,10L)
-    let mutable (quotient, remainder) = a/b
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(2L, 10L)
-    let mutable expectedQuotient = BigInt(2L,10L)
-    let mutable expectedRemainder = BigInt(1L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient <- BigInt(2L,10L)
+    expectedRemainder <- BigInt(1L,10L)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(3L, 10L)
-    let mutable expectedQuotient = BigInt(1L,10L)
-    let mutable expectedRemainder = BigInt(2L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient  <- BigInt(1L,10L)
+    expectedRemainder <- BigInt(2L,10L)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(6L, 10L)
-    let mutable expectedQuotient = BigInt(0L,10L)
-    let mutable expectedRemainder = BigInt(5L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient <- BigInt(0L,10L)
+    expectedRemainder <- BigInt(5L,10L)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(5L, 10L)
-    let mutable expectedQuotient = BigInt(11L,10L)
-    let mutable expectedRemainder = BigInt(0L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient <- BigInt(11L,10L)
+    expectedRemainder <- BigInt(0L,10L)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(11L, 10L)
-    let mutable expectedQuotient = BigInt(5L,10L)
-    let mutable expectedRemainder = BigInt(0L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient <- BigInt(5L,10L)
+    expectedRemainder <- BigInt(0L,10L)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(10L, 10L)
-    let mutable expectedQuotient = BigInt(5L,10L)
-    let mutable expectedRemainder = BigInt(5L,10L)
-    let mutable (quotient, remainder) = a/b
+    expectedQuotient <- BigInt(5L,10L)
+    expectedRemainder <- BigInt(5L,10L)
+    let (quotient, remainder) = a/b
+    Assert.AreEqual(expectedQuotient, quotient)
+    Assert.AreEqual(expectedRemainder, remainder)
+    
+    a <- BigInt.bigFactorial(23)
+    b <- BigInt.bigFactorial(10) * BigInt.bigFactorial(23L-10L)
+    expectedQuotient <- BigInt(1144066L, BigInt.INT_32_RADIX)
+    expectedRemainder <- BigInt(0L, BigInt.INT_32_RADIX)
+    let (quotient, remainder) = a/b
     Assert.AreEqual(expectedQuotient, quotient)
     Assert.AreEqual(expectedRemainder, remainder)
 
@@ -339,3 +352,9 @@ let division () =
 
     b <- BigInt.zero 10L
     Assert.Throws<System.DivideByZeroException>(fun () -> (a/b) |> ignore) |> ignore
+
+[<Test>]
+let bigFactorial () =
+    Assert.AreEqual("25852016738884976640000", BigInt.bigFactorial(23).ToString())
+    Assert.AreEqual(Some(3628800L), (BigInt.bigFactorial(10) |> BigInt.scalar))
+    Assert.AreEqual(Some(6227020800L), (BigInt.bigFactorial(23L - 10L) |> BigInt.scalar))
