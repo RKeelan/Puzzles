@@ -43,7 +43,12 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
     member this.sumOfDigits () : int64 =
         this.ToString().ToCharArray() |> Array.fold (fun (acc:int64) (c:char) ->
             acc + Int64.Parse(c.ToString())) 0L
-    
+            
+    static member private trim (components : list<int64>) =
+        let index = components |> List.tryFindIndexBack (fun n -> n <> 0)
+        if index.IsNone then components
+        else List.take (index.Value + 1) components
+        
     // Addition -----------------------------------------------------------------------------------
 
     static member private addRec
@@ -60,21 +65,21 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
         | ([], (bHead :: bTail)) ->
             let newHead = 
                 if (bHead + carryOver) >= radix then
-                   (bHead + carryOver) % radix
+                    (bHead + carryOver) % radix
                 else (bHead + carryOver)
             let newCarryOver = (bHead + carryOver) / radix
             newHead :: (BigInt.addRec [] bTail radix newCarryOver)
         | ((aHead :: aTail), []) -> 
             let newHead = 
                 if (aHead + carryOver) >= radix then
-                   (aHead + carryOver) % radix
+                    (aHead + carryOver) % radix
                 else (aHead + carryOver)
             let newCarryOver = (aHead + carryOver) / radix
             newHead :: (BigInt.addRec [] aTail radix newCarryOver)
         | ((aHead :: aTail), (bHead :: bTail)) ->
             let newHead = 
                 if (aHead + bHead + carryOver) >= radix then
-                   (aHead + bHead + carryOver) % radix
+                    (aHead + bHead + carryOver) % radix
                 else (aHead + bHead + carryOver)
             let newCarryOver = (aHead + bHead + carryOver) / radix
             newHead :: (BigInt.addRec aTail bTail radix newCarryOver)
@@ -85,6 +90,45 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
     static member (+) (a:BigInt, b:int64) : BigInt =
         new BigInt((BigInt.addRec a.Components [b] a.Radix 0L), a.Radix)
+        
+    // Subtraction --------------------------------------------------------------------------------
+   
+    static member private subRec
+        (a : list<int64>)
+        (b : list<int64>)
+        (radix : int64)
+        (borrow : bool)
+        : list<int64> =
+        match (a, b) with
+        | ([], []) ->
+            if borrow then raise(ArgumentException("BigInt does not support negative numbers."))
+            else []
+        | ([], _) -> raise(ArgumentException("BigInt does not support negative numbers."))
+        | ((aHead :: []), []) ->
+            let newHead = 
+                if borrow then aHead - 1L
+                else aHead
+            if newHead < 0 then raise(ArgumentException("BigInt does not support negative numbers."))
+            elif newHead = 0 then []
+            else [newHead]
+        | ((aHead :: aTail), []) ->
+            let newHead = 
+                if borrow then aHead - 1L
+                else aHead
+            if newHead < 0 then (newHead + radix) :: (BigInt.subRec aTail [] radix true)
+            else newHead :: (BigInt.subRec aTail [] radix false)
+        | ((aHead :: aTail), (bHead :: bTail)) ->
+            let newHead = 
+                if borrow then aHead - bHead - 1L
+                else aHead - bHead
+            if newHead < 0 then (newHead + radix) :: (BigInt.subRec aTail bTail radix true)
+            else newHead :: (BigInt.subRec aTail bTail radix false)
+            
+    static member (-) (a:BigInt, b:BigInt) : BigInt =
+        if a.Radix <> b.Radix then do raise(ArgumentException("Both operands need the same radix"))
+        let components = BigInt.subRec a.Components b.Components a.Radix false
+        let trimmedComponents = BigInt.trim components
+        new BigInt(trimmedComponents, a.Radix)
         
     // Multiplication -----------------------------------------------------------------------------
     

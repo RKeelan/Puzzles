@@ -90,7 +90,7 @@ let sumOfDigits () =
     let mutable bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
     Assert.AreEqual(1366, bigInt.sumOfDigits())
 
-    bigInt <- BigInt.factorial 100L
+    bigInt <- BigInt.bigFactorial 100L
     Assert.AreEqual(648, bigInt.sumOfDigits())
 
 [<Test>]
@@ -109,6 +109,89 @@ let add () =
     b <- new BigInt(9L, 10L)
     c <- a + b
     Assert.AreEqual("123456798", c.ToString())
+
+[<Test>]
+let subtractRadix10 () =
+    // No Borrow
+    let mutable a = new BigInt(6L, 10L)
+    let mutable b = new BigInt(5L, 10L)
+    let mutable expected = BigInt(1L, 10L)
+    Assert.AreEqual(expected, a-b)
+
+    a <- new BigInt(11L, 10L)
+    b <- new BigInt(5L, 10L)
+    expected <- BigInt(6L, 10L)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(10L, 10L)
+    b <- new BigInt(9L, 10L)
+    expected <- BigInt(1L, 10L)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(100L, 10L)
+    b <- new BigInt(99L, 10L)
+    expected <- BigInt(1L, 10L)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(100000L, 10L)
+    b <- new BigInt(99999L, 10L)
+    expected <- BigInt(1L, 10L)
+    Assert.AreEqual(expected, a-b)
+
+    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    
+[<Test>]
+let subtractRadix100 () =
+    // No Borrow
+    let mutable a = new BigInt(90L, 100L)
+    let mutable b = new BigInt(55L, 100L)
+    let mutable expected = BigInt(35L, 100L)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(1082L, 100L)
+    b <- new BigInt(83L, 100L)
+    expected <- BigInt(999L, 100L)
+    Assert.AreEqual(expected, a-b)
+        
+    // Borrow in first digit
+    a <- new BigInt(100000L, 100L)
+    b <- new BigInt(99999L, 100L)
+    expected <- BigInt(1L, 100L)
+    Assert.AreEqual(expected, a-b)
+    
+    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    
+[<Test>]
+let subtractRadixInt32Max () =
+    let mutable a = new BigInt(4379823623L, BigInt.INT_32_RADIX)
+    let mutable b = new BigInt(3879482793L, BigInt.INT_32_RADIX)
+    let mutable expected = BigInt(500340830L, BigInt.INT_32_RADIX)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(1532938268050L, BigInt.INT_32_RADIX)
+    b <- new BigInt(104746035411L, BigInt.INT_32_RADIX)
+    expected <- BigInt(1428192232639L, BigInt.INT_32_RADIX)
+    Assert.AreEqual(expected, a-b)
+    
+    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    
+[<Test>]
+let subtractRadixInt64Max () =
+    let mutable a = new BigInt(10949559058L, BigInt.INT_64_RADIX)
+    let mutable b = new BigInt(6595120748L, BigInt.INT_64_RADIX)
+    let mutable expected = BigInt(4354438310L, BigInt.INT_64_RADIX)
+    Assert.AreEqual(expected, a-b)
+    
+    a <- new BigInt(2299407402075L, BigInt.INT_64_RADIX)
+    b <- new BigInt(1361698460343L, BigInt.INT_64_RADIX)
+    expected <- BigInt(937708941732L, BigInt.INT_64_RADIX)
+    Assert.AreEqual(expected, a-b)
+
+    a <- a * 255L
+    b <- b * 255L
+    expected <- BigInt(239115780141660L, BigInt.INT_64_RADIX)
+    
+    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
 
 [<Test>]
 let multiplyScalar () =
@@ -144,5 +227,4 @@ let multiplyBigInt () =
     let mutable b = BigInt(8000000L, BigInt.INT_32_RADIX)
     let mutable expected = BigInt(64000000000000L, BigInt.INT_32_RADIX)
     Assert.AreEqual(expected, a*b)
-
 
