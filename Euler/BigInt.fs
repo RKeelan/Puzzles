@@ -205,8 +205,29 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
     static member (*) (a:BigInt, b:BigInt) : BigInt =
         if a.Radix <> b.Radix then do raise(ArgumentException("Both operands need the same radix"))
         BigInt.multiplyBigInt a b.Components (BigInt(0L, a.Radix))
+        
+    // Division -----------------------------------------------------------------------------------
 
-    // Factorial ----------------------------------------------------------------------------------
+    static member private divideBigInt
+        (dividend : BigInt)
+        (divisor : BigInt)
+        : (BigInt*BigInt) =
+        if dividend.Radix <> divisor.Radix then do
+            raise(ArgumentException("Both operands need the same radix"))
+
+        if divisor = (BigInt.zero divisor.Radix) then do
+            raise(DivideByZeroException("Divisor was 0"))
+
+        let mutable quotient = BigInt.zero(dividend.Radix)
+        let mutable remainder = dividend
+
+        while remainder >= divisor do
+            remainder <- remainder - divisor
+            quotient <- quotient + 1L
+
+        ((BigInt.trim quotient), (BigInt.trim remainder))
+
+    static member (/) (a:BigInt, b:BigInt) = BigInt.divideBigInt a b
 
 // Static Functions -------------------------------------------------------------------------------
 
