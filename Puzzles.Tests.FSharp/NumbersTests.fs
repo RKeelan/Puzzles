@@ -45,7 +45,7 @@ let lowestMultiple () =
 
 [<Test>]
 let factorial () =
-    Assert.AreEqual(0, factorial 0)
+    Assert.AreEqual(1, factorial 0)
     Assert.AreEqual(1, factorial 1)
     Assert.AreEqual(2, factorial 2)
     Assert.AreEqual(6, factorial 3)

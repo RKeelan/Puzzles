@@ -52,7 +52,7 @@ let inline lowestMultiple x y =
 // RK 29-Dec-2021: This means reduce the sequence using reduce and the "*" operator
 let inline factorial n = 
     match n with
-    | m when m = GenericZero -> GenericZero
+    | m when m = GenericZero -> GenericOne
     | _ -> seq {GenericOne .. n} |> Seq.reduce (*)
 
 let inline summands n = seq { for i in GenericZero .. (n/2) ->  (i,n-i) }

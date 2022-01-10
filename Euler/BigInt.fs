@@ -254,6 +254,6 @@ let parse (n:String) (radix:int64) : BigInt =
 
 let rec bigFactorial n : BigInt =
     match n with
-    | 0L -> new BigInt(0L)
+    | 0L -> new BigInt(1L)
     | 1L -> new BigInt(1L)
     | _ -> (bigFactorial (n - 1L)) * n

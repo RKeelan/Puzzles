@@ -396,6 +396,7 @@ let parse () =
 
 [<Test>]
 let bigFactorial () =
+    Assert.AreEqual(Some(1L), BigInt.scalar(BigInt.bigFactorial(0)))
     Assert.AreEqual("25852016738884976640000", BigInt.bigFactorial(23).ToString())
     Assert.AreEqual(Some(3628800L), (BigInt.bigFactorial(10) |> BigInt.scalar))
     Assert.AreEqual(Some(6227020800L), (BigInt.bigFactorial(23L - 10L) |> BigInt.scalar))
