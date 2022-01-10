@@ -270,3 +270,5 @@ let rec bigFactorial n : BigInt =
     | 0L -> new BigInt(1L)
     | 1L -> new BigInt(1L)
     | _ -> (bigFactorial (n - 1L)) * n
+
+let numDigits n = n.ToString().Length
