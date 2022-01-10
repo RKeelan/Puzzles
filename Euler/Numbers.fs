@@ -3,8 +3,7 @@
 open LanguagePrimitives
 
 let numDigits n =
-    match n with
-    | 0 -> 1
+    match abs(n) with
     | m when m < 10 -> 1
     | m when m < 100 -> 2
     | m when m < 1000 -> 3
@@ -15,6 +14,28 @@ let numDigits n =
     | m when m < 100000000 -> 8
     | m when m < 1000000000 -> 9
     | _ -> 10 // RK 01-Jan-2021: This works because this function only works for int32s
+    
+let numDigits64 n =
+    match abs(n) with
+    | m when m < 10L -> 1
+    | m when m < 100L -> 2
+    | m when m < 1000L -> 3
+    | m when m < 10000L -> 4
+    | m when m < 100000L -> 5
+    | m when m < 1000000L -> 6
+    | m when m < 10000000L -> 7
+    | m when m < 100000000L -> 8
+    | m when m < 1000000000L -> 9
+    | m when m < 10000000000L -> 10
+    | m when m < 100000000000L -> 11
+    | m when m < 1000000000000L -> 12
+    | m when m < 10000000000000L -> 13
+    | m when m < 100000000000000L -> 14
+    | m when m < 1000000000000000L -> 15
+    | m when m < 10000000000000000L -> 16
+    | m when m < 100000000000000000L -> 17
+    | m when m < 1000000000000000000L -> 18
+    | _ -> 19 // RK 09-Jan-2021: This works because this function only works for int32s
 
 // Return the lowest multiple of x that's less than or equal to y, and the factor that produced it
 let inline lowestMultiple x y =
