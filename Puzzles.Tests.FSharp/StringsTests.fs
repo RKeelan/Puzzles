@@ -18,6 +18,12 @@ let hasDuplicates () =
     Assert.IsFalse(hasDuplicates "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv")
     
 [<Test>]
+let reverse () =
+    Assert.AreEqual("1", (reverse "1"))
+    Assert.AreEqual("12", (reverse "21"))
+    Assert.AreEqual("123", (reverse "321"))
+    
+[<Test>]
 let rotate () =
     Assert.AreEqual("001", (rotate "100"))
     

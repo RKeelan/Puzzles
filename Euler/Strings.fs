@@ -10,6 +10,8 @@ let hasDuplicates (s:string) : bool =
     let set = s.ToCharArray() |> Set.ofSeq
     set.Count < s.Length
 
+let reverse (s:string) = new String(Array.rev (s.ToCharArray()))
+
 let rotate (s:string) = s.Substring(1) + s.[0].ToString()
 
 let rotations s = seq {
