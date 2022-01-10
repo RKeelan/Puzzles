@@ -233,9 +233,22 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
         let quotient = new BigInt(quotientList, radix)
         ((BigInt.trim quotient), (BigInt.trim remainder))
-            
 
     static member (/) (a:BigInt, b:BigInt) = BigInt.divideBigInt a b
+
+    // Exponentiation -----------------------------------------------------------------------------
+
+    static member private power
+        (b : BigInt)
+        (n : int32)
+        (acc : BigInt)
+        : (BigInt) =
+        match n with
+        | 0 -> new BigInt(1L, b.Radix)
+        | 1 -> acc
+        | _ -> BigInt.power b (n - 1) (acc * b)
+        
+    static member Pow (b:BigInt, n:int) = BigInt.power b n b
 
 // Static Functions -------------------------------------------------------------------------------
 

@@ -354,6 +354,23 @@ let division () =
     Assert.Throws<System.DivideByZeroException>(fun () -> (a/b) |> ignore) |> ignore
 
 [<Test>]
+let power () = 
+    let mutable b = new BigInt(2,10L)
+    let mutable n = 0
+    let mutable expected = new BigInt(1L, 10L)
+    Assert.AreEqual(expected, b**n)
+
+    let mutable b = new BigInt(2, 10L)
+    let mutable n = 1
+    let mutable expected = new BigInt(2L, 10L)
+    Assert.AreEqual(expected, b**n)
+    
+    let mutable b = new BigInt(2, 10L)
+    let mutable n = 32
+    let mutable expected = new BigInt(4294967296L, 10L)
+    Assert.AreEqual(expected, b**n)
+
+[<Test>]
 let parse () =
     let mutable actual = BigInt.parse "0" 10L
     let mutable expected = new BigInt(0L, 10L)
