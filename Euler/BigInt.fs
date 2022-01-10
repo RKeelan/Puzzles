@@ -239,6 +239,19 @@ type BigInt (componentsIn : list<int64>, radixIn : int64) =
 
 // Static Functions -------------------------------------------------------------------------------
 
+let parse (n:String) (radix:int64) : BigInt =
+    let chunkSize = (Numbers.numDigits64 radix) - 1
+    let initialComponents:list<int64> =
+        n |> List.unfold (fun n ->
+            if String.IsNullOrEmpty(n) then None
+            elif n.Length <= chunkSize then Some(Int64.Parse(n),String.Empty)
+            else
+                let chunk = n.Substring(n.Length - chunkSize)
+                let remainder = n.Substring(0, n.Length - chunkSize)
+                Some(Int64.Parse(chunk), remainder))
+    if List.isEmpty initialComponents then BigInt([0L], radix)
+    else BigInt(initialComponents, radix)
+
 let rec bigFactorial n : BigInt =
     match n with
     | 0L -> new BigInt(0L)

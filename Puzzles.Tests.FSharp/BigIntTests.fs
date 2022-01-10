@@ -354,6 +354,47 @@ let division () =
     Assert.Throws<System.DivideByZeroException>(fun () -> (a/b) |> ignore) |> ignore
 
 [<Test>]
+let parse () =
+    let mutable actual = BigInt.parse "0" 10L
+    let mutable expected = new BigInt(0L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "1" 10L
+    expected <- new BigInt(1L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "10" 10L
+    expected <- new BigInt(10L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "15" 10L
+    expected <- new BigInt(15L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "99" 10L
+    expected <- new BigInt(99L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "101" 10L
+    expected <- new BigInt(101L, 10L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "99" 100L
+    expected <- new BigInt(99L, 100L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "555" 100L
+    expected <- new BigInt(555L, 100L)
+    Assert.AreEqual(expected, actual)
+    
+    actual <- BigInt.parse "1111" 100L
+    expected <- new BigInt(1111L, 100L)
+    Assert.AreEqual(expected, actual)
+
+    actual <- BigInt.parse "4668731596684224866951378664" BigInt.INT_32_RADIX
+    Assert.AreEqual("4668731596684224866951378664", actual.ToString())
+
+[<Test>]
 let bigFactorial () =
     Assert.AreEqual("25852016738884976640000", BigInt.bigFactorial(23).ToString())
     Assert.AreEqual(Some(3628800L), (BigInt.bigFactorial(10) |> BigInt.scalar))
