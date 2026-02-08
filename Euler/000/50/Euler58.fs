@@ -46,7 +46,7 @@ let primeFraction N =
     let increments = Seq.init (sequenceLength - 1) (fun n -> 2*(1+(n/4)))
     //printfn "Increments: %s" (String.Join(" ", increments))
     let terms = Seq.scan (fun acc increment -> (acc + increment)) 1 increments |> Seq.toList
-    let primeTerms = terms |> List.filter Primes.isPrimeCached
+    let primeTerms = terms |> List.filter Primes.isPrime
     (double primeTerms.Length) / (double terms.Length)
 
 [<EntryPoint>]
