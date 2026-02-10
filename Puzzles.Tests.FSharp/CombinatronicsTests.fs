@@ -2,6 +2,7 @@
 
 open System
 open NUnit.Framework
+open NUnit.Framework.Legacy
 
 open System
 
@@ -14,7 +15,7 @@ let words () =
         ['B']
     }
     let mutable actual = Combinatronics.words abAlphabet 1
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     expected <- seq {
         ['A';'A'];
@@ -23,8 +24,8 @@ let words () =
         ['B';'B']
     }
     actual <- Combinatronics.words abAlphabet 2
-    Assert.AreEqual(expected, actual)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     expected <- seq {
         ['A';'A';'A'];
@@ -37,4 +38,4 @@ let words () =
         ['B';'B';'B']
     }
     actual <- Combinatronics.words abAlphabet 3
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)

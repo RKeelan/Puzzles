@@ -1,6 +1,7 @@
 ﻿module Puzzles.Tests.FSharp.BigIntTests
 
 open NUnit.Framework
+open NUnit.Framework.Legacy
 open BigInt
 
 let rec double (number : BigInt) (n : int64) =
@@ -12,153 +13,153 @@ let rec double (number : BigInt) (n : int64) =
 [<Test>]
 let ctor () =
     let mutable bigInt = BigInt(0L, 10L)
-    Assert.AreEqual("0", bigInt.ToString())
+    ClassicAssert.AreEqual("0", bigInt.ToString())
 
     bigInt <- BigInt(1L, 10L)
-    Assert.AreEqual("1", bigInt.ToString())
+    ClassicAssert.AreEqual("1", bigInt.ToString())
 
     bigInt <- BigInt(11L, 10L)
-    Assert.AreEqual("11", bigInt.ToString())
+    ClassicAssert.AreEqual("11", bigInt.ToString())
     
     bigInt <- BigInt(1000L, BigInt.INT_32_RADIX)
-    Assert.AreEqual("1000", bigInt.ToString())
+    ClassicAssert.AreEqual("1000", bigInt.ToString())
     
     bigInt <- BigInt(12345678901L, BigInt.INT_32_RADIX)
-    Assert.AreEqual("12345678901", bigInt.ToString())
+    ClassicAssert.AreEqual("12345678901", bigInt.ToString())
     
     bigInt <- BigInt(12345678901L, BigInt.INT_64_RADIX)
-    Assert.AreEqual("12345678901", bigInt.ToString())
+    ClassicAssert.AreEqual("12345678901", bigInt.ToString())
     
     bigInt <- BigInt(123456789987654L, BigInt.INT_64_RADIX)
-    Assert.AreEqual("123456789987654", bigInt.ToString())
+    ClassicAssert.AreEqual("123456789987654", bigInt.ToString())
 
 [<Test>]
 let toString () =
     let mutable bigInt = BigInt(101L, 10L)
-    Assert.AreEqual("101", bigInt.ToString())
+    ClassicAssert.AreEqual("101", bigInt.ToString())
 
     bigInt <- BigInt(1001L, 100L)
-    Assert.AreEqual("1001", bigInt.ToString())
+    ClassicAssert.AreEqual("1001", bigInt.ToString())
     
     bigInt <- BigInt(10001L, 1000L)
-    Assert.AreEqual("10001", bigInt.ToString())
+    ClassicAssert.AreEqual("10001", bigInt.ToString())
     
     bigInt <- BigInt(100001L, 10000L)
-    Assert.AreEqual("100001", bigInt.ToString())
+    ClassicAssert.AreEqual("100001", bigInt.ToString())
     
     bigInt <- BigInt(1000001L, 100000L)
-    Assert.AreEqual("1000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000001", bigInt.ToString())
     
     bigInt <- BigInt(10000001L, 1000000L)
-    Assert.AreEqual("10000001", bigInt.ToString())
+    ClassicAssert.AreEqual("10000001", bigInt.ToString())
     
     bigInt <- BigInt(100000001L, 10000000L)
-    Assert.AreEqual("100000001", bigInt.ToString())
+    ClassicAssert.AreEqual("100000001", bigInt.ToString())
     
     bigInt <- BigInt(1000000001L, 100000000L)
-    Assert.AreEqual("1000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000000001", bigInt.ToString())
     
     bigInt <- BigInt(10000000001L, 1000000000L)
-    Assert.AreEqual("10000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("10000000001", bigInt.ToString())
     
     bigInt <- BigInt(100000000001L, 10000000000L)
-    Assert.AreEqual("100000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("100000000001", bigInt.ToString())
     
     bigInt <- BigInt(1000000000001L, 100000000000L)
-    Assert.AreEqual("1000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000000000001", bigInt.ToString())
     
     bigInt <- BigInt(10000000000001L, 1000000000000L)
-    Assert.AreEqual("10000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("10000000000001", bigInt.ToString())
     
     bigInt <- BigInt(100000000000001L, 10000000000000L)
-    Assert.AreEqual("100000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("100000000000001", bigInt.ToString())
     
     bigInt <- BigInt(1000000000000001L, 100000000000000L)
-    Assert.AreEqual("1000000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000000000000001", bigInt.ToString())
     
     bigInt <- BigInt(10000000000000001L, 1000000000000000L)
-    Assert.AreEqual("10000000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("10000000000000001", bigInt.ToString())
     
     bigInt <- BigInt(100000000000000001L, 10000000000000000L)
-    Assert.AreEqual("100000000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("100000000000000001", bigInt.ToString())
     
     bigInt <- BigInt(1000000000000000001L, 100000000000000000L)
-    Assert.AreEqual("1000000000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000000000000000001", bigInt.ToString())
     
     bigInt <- BigInt(1000000000000000001L, 10L)
-    Assert.AreEqual("1000000000000000001", bigInt.ToString())
+    ClassicAssert.AreEqual("1000000000000000001", bigInt.ToString())
 
 [<Test>]
 let comparison () =
     let mutable a = new BigInt(1,10)
     let mutable b = new BigInt(1,100)
-    Assert.Throws<System.ArgumentException>(fun () -> (compare a b) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (compare a b) |> ignore) |> ignore
 
     a <- new BigInt(1,10)
     b <- new BigInt(1,10)
-    Assert.AreEqual(0, (compare a b))
-    Assert.IsTrue(a >= b)
-    Assert.IsTrue(a <= b)
+    ClassicAssert.AreEqual(0, (compare a b))
+    ClassicAssert.IsTrue(a >= b)
+    ClassicAssert.IsTrue(a <= b)
     
     a <- new BigInt(2,10)
     b <- new BigInt(1,10)
-    Assert.AreEqual(1, (compare a b))
+    ClassicAssert.AreEqual(1, (compare a b))
     
     a <- new BigInt(1,10)
     b <- new BigInt(2,10)
-    Assert.AreEqual(-1, (compare a b))
+    ClassicAssert.AreEqual(-1, (compare a b))
     
     a <- new BigInt(11,10)
     b <- new BigInt(9,10)
-    Assert.AreEqual(1, (compare a b))
+    ClassicAssert.AreEqual(1, (compare a b))
     
     a <- new BigInt(91,10)
     b <- new BigInt(19,10)
-    Assert.AreEqual(1, (compare a b))
+    ClassicAssert.AreEqual(1, (compare a b))
 
-    Assert.IsTrue(a > b)
-    Assert.IsTrue(a >= b)
-    Assert.IsFalse(a < b)
-    Assert.IsFalse(a <= b)
+    ClassicAssert.IsTrue(a > b)
+    ClassicAssert.IsTrue(a >= b)
+    ClassicAssert.IsFalse(a < b)
+    ClassicAssert.IsFalse(a <= b)
 
 [<Test>]
 let sumOfDigits () =
     let mutable bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
-    Assert.AreEqual(1366, bigInt.sumOfDigits())
+    ClassicAssert.AreEqual(1366, bigInt.sumOfDigits())
 
     bigInt <- BigInt.bigFactorial 100L
-    Assert.AreEqual(648, bigInt.sumOfDigits())
+    ClassicAssert.AreEqual(648, bigInt.sumOfDigits())
 
 [<Test>]
 let scalar () =
     let mutable a = new BigInt(3L, 10L)
-    Assert.AreEqual(Some(3L), (BigInt.scalar a))
+    ClassicAssert.AreEqual(Some(3L), (BigInt.scalar a))
     
     a <- new BigInt(33L, 10L)
-    Assert.AreEqual(Some(33L), (BigInt.scalar a))
+    ClassicAssert.AreEqual(Some(33L), (BigInt.scalar a))
     
     a <- new BigInt(3L, 100L)
-    Assert.AreEqual(Some(3L), (BigInt.scalar a))
+    ClassicAssert.AreEqual(Some(3L), (BigInt.scalar a))
 
     a <- double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
-    Assert.AreEqual(None, (BigInt.scalar a))
+    ClassicAssert.AreEqual(None, (BigInt.scalar a))
 
 [<Test>]
 let add () =
     let mutable a = new BigInt(6L, 10L)
     let mutable b = new BigInt(5L, 10L)
     let mutable c = a + b
-    Assert.AreEqual("11", c.ToString())
+    ClassicAssert.AreEqual("11", c.ToString())
 
     a <- new BigInt(21L, 10L)
     b <- new BigInt(103L, 10L)
     c <- a + b
-    Assert.AreEqual("124", c.ToString())
+    ClassicAssert.AreEqual("124", c.ToString())
     
     a <- new BigInt(123456789L, 10L)
     b <- new BigInt(9L, 10L)
     c <- a + b
-    Assert.AreEqual("123456798", c.ToString())
+    ClassicAssert.AreEqual("123456798", c.ToString())
 
 [<Test>]
 let subtractRadix10 () =
@@ -166,29 +167,29 @@ let subtractRadix10 () =
     let mutable a = new BigInt(6L, 10L)
     let mutable b = new BigInt(5L, 10L)
     let mutable expected = BigInt(1L, 10L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
 
     a <- new BigInt(11L, 10L)
     b <- new BigInt(5L, 10L)
     expected <- BigInt(6L, 10L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(10L, 10L)
     b <- new BigInt(9L, 10L)
     expected <- BigInt(1L, 10L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(100L, 10L)
     b <- new BigInt(99L, 10L)
     expected <- BigInt(1L, 10L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(100000L, 10L)
     b <- new BigInt(99999L, 10L)
     expected <- BigInt(1L, 10L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
 
-    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
     
 [<Test>]
 let subtractRadix100 () =
@@ -196,92 +197,92 @@ let subtractRadix100 () =
     let mutable a = new BigInt(90L, 100L)
     let mutable b = new BigInt(55L, 100L)
     let mutable expected = BigInt(35L, 100L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(1082L, 100L)
     b <- new BigInt(83L, 100L)
     expected <- BigInt(999L, 100L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
         
     // Borrow in first digit
     a <- new BigInt(100000L, 100L)
     b <- new BigInt(99999L, 100L)
     expected <- BigInt(1L, 100L)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
-    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
     
 [<Test>]
 let subtractRadixInt32Max () =
     let mutable a = new BigInt(4379823623L, BigInt.INT_32_RADIX)
     let mutable b = new BigInt(3879482793L, BigInt.INT_32_RADIX)
     let mutable expected = BigInt(500340830L, BigInt.INT_32_RADIX)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(1532938268050L, BigInt.INT_32_RADIX)
     b <- new BigInt(104746035411L, BigInt.INT_32_RADIX)
     expected <- BigInt(1428192232639L, BigInt.INT_32_RADIX)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
-    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
     
 [<Test>]
 let subtractRadixInt64Max () =
     let mutable a = new BigInt(10949559058L, BigInt.INT_64_RADIX)
     let mutable b = new BigInt(6595120748L, BigInt.INT_64_RADIX)
     let mutable expected = BigInt(4354438310L, BigInt.INT_64_RADIX)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
     
     a <- new BigInt(2299407402075L, BigInt.INT_64_RADIX)
     b <- new BigInt(1361698460343L, BigInt.INT_64_RADIX)
     expected <- BigInt(937708941732L, BigInt.INT_64_RADIX)
-    Assert.AreEqual(expected, a-b)
+    ClassicAssert.AreEqual(expected, a-b)
 
     a <- a * 255L
     b <- b * 255L
     expected <- BigInt(239115780141660L, BigInt.INT_64_RADIX)
     
-    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
 
 [<Test>]
 let multiplyScalar () =
     let mutable bigInt = BigInt(6L, 10L)
     bigInt <- bigInt * 2L
-    Assert.AreEqual("12", bigInt.ToString())
+    ClassicAssert.AreEqual("12", bigInt.ToString())
     
     let bigInt = double (new BigInt(1L, BigInt.INT_32_RADIX)) 1000L
     let bigResult = "107150860718626732094842504906000181056140481170553360744375038837035105112" +
                     "493612249319837881569585812759467291755314682518714528569231404359845775746" +
                     "985748039345677748242309854210746050623711418779541821530464749835819412673" +
                     "98767559165543946077062914571196477686542167660429831652624386837205668069376"
-    Assert.AreEqual(bigResult, bigInt.ToString())
+    ClassicAssert.AreEqual(bigResult, bigInt.ToString())
 
 [<Test>]
 let multiplyBigInt () =
     let mutable a = BigInt(3L, 10L)
     let mutable b = BigInt(2L, 10L)
     let mutable expected = BigInt(6L, 10L)
-    Assert.AreEqual(expected, a*b)
+    ClassicAssert.AreEqual(expected, a*b)
     
     let mutable a = BigInt(6L, 10L)
     let mutable b = BigInt(2L, 10L)
     let mutable expected = BigInt(12L, 10L)
-    Assert.AreEqual(expected, a*b)
+    ClassicAssert.AreEqual(expected, a*b)
     
     let mutable a = BigInt(12L, 10L)
     let mutable b = BigInt(12L, 10L)
     let mutable expected = BigInt(144L, 10L)
-    Assert.AreEqual(expected, a*b)
+    ClassicAssert.AreEqual(expected, a*b)
     
     let mutable a = BigInt(8000000L, BigInt.INT_32_RADIX)
     let mutable b = BigInt(8000000L, BigInt.INT_32_RADIX)
     let mutable expected = BigInt(64000000000000L, BigInt.INT_32_RADIX)
-    Assert.AreEqual(expected, a*b)
+    ClassicAssert.AreEqual(expected, a*b)
 
     let mutable a = BigInt.bigFactorial(10)
     let mutable b = BigInt.bigFactorial(23L - 10L)
     let mutable expected = BigInt(22596613079040000L, BigInt.INT_32_RADIX)
-    Assert.AreEqual(expected, a*b)
+    ClassicAssert.AreEqual(expected, a*b)
 
 [<Test>]
 let division () =
@@ -290,130 +291,130 @@ let division () =
     let mutable expectedQuotient = BigInt(5L,10L)
     let mutable expectedRemainder = BigInt(0L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(2L, 10L)
     expectedQuotient <- BigInt(2L,10L)
     expectedRemainder <- BigInt(1L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(3L, 10L)
     expectedQuotient  <- BigInt(1L,10L)
     expectedRemainder <- BigInt(2L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     b <- BigInt(6L, 10L)
     expectedQuotient <- BigInt(0L,10L)
     expectedRemainder <- BigInt(5L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(5L, 10L)
     expectedQuotient <- BigInt(11L,10L)
     expectedRemainder <- BigInt(0L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(11L, 10L)
     expectedQuotient <- BigInt(5L,10L)
     expectedRemainder <- BigInt(0L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt(55L, 10L)
     b <- BigInt(10L, 10L)
     expectedQuotient <- BigInt(5L,10L)
     expectedRemainder <- BigInt(5L,10L)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
     
     a <- BigInt.bigFactorial(23)
     b <- BigInt.bigFactorial(10) * BigInt.bigFactorial(23L-10L)
     expectedQuotient <- BigInt(1144066L, BigInt.INT_32_RADIX)
     expectedRemainder <- BigInt(0L, BigInt.INT_32_RADIX)
     let (quotient, remainder) = a/b
-    Assert.AreEqual(expectedQuotient, quotient)
-    Assert.AreEqual(expectedRemainder, remainder)
+    ClassicAssert.AreEqual(expectedQuotient, quotient)
+    ClassicAssert.AreEqual(expectedRemainder, remainder)
 
     a <- BigInt(5L, 10L)
     b <- BigInt(5L, 100L)
-    Assert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
+    ClassicAssert.Throws<System.ArgumentException>(fun () -> (b-a) |> ignore) |> ignore
 
     b <- BigInt.zero 10L
-    Assert.Throws<System.DivideByZeroException>(fun () -> (a/b) |> ignore) |> ignore
+    ClassicAssert.Throws<System.DivideByZeroException>(fun () -> (a/b) |> ignore) |> ignore
 
 [<Test>]
 let power () = 
     let mutable b = new BigInt(2,10L)
     let mutable n = 0
     let mutable expected = new BigInt(1L, 10L)
-    Assert.AreEqual(expected, b**n)
+    ClassicAssert.AreEqual(expected, b**n)
 
     let mutable b = new BigInt(2, 10L)
     let mutable n = 1
     let mutable expected = new BigInt(2L, 10L)
-    Assert.AreEqual(expected, b**n)
+    ClassicAssert.AreEqual(expected, b**n)
     
     let mutable b = new BigInt(2, 10L)
     let mutable n = 32
     let mutable expected = new BigInt(4294967296L, 10L)
-    Assert.AreEqual(expected, b**n)
+    ClassicAssert.AreEqual(expected, b**n)
 
 [<Test>]
 let parse () =
     let mutable actual = BigInt.parse "0" 10L
     let mutable expected = new BigInt(0L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "1" 10L
     expected <- new BigInt(1L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "10" 10L
     expected <- new BigInt(10L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "15" 10L
     expected <- new BigInt(15L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "99" 10L
     expected <- new BigInt(99L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "101" 10L
     expected <- new BigInt(101L, 10L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "99" 100L
     expected <- new BigInt(99L, 100L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "555" 100L
     expected <- new BigInt(555L, 100L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
     
     actual <- BigInt.parse "1111" 100L
     expected <- new BigInt(1111L, 100L)
-    Assert.AreEqual(expected, actual)
+    ClassicAssert.AreEqual(expected, actual)
 
     actual <- BigInt.parse "4668731596684224866951378664" BigInt.INT_32_RADIX
-    Assert.AreEqual("4668731596684224866951378664", actual.ToString())
+    ClassicAssert.AreEqual("4668731596684224866951378664", actual.ToString())
 
 [<Test>]
 let bigFactorial () =
-    Assert.AreEqual(Some(1L), BigInt.scalar(BigInt.bigFactorial(0)))
-    Assert.AreEqual("25852016738884976640000", BigInt.bigFactorial(23).ToString())
-    Assert.AreEqual(Some(3628800L), (BigInt.bigFactorial(10) |> BigInt.scalar))
-    Assert.AreEqual(Some(6227020800L), (BigInt.bigFactorial(23L - 10L) |> BigInt.scalar))
+    ClassicAssert.AreEqual(Some(1L), BigInt.scalar(BigInt.bigFactorial(0)))
+    ClassicAssert.AreEqual("25852016738884976640000", BigInt.bigFactorial(23).ToString())
+    ClassicAssert.AreEqual(Some(3628800L), (BigInt.bigFactorial(10) |> BigInt.scalar))
+    ClassicAssert.AreEqual(Some(6227020800L), (BigInt.bigFactorial(23L - 10L) |> BigInt.scalar))

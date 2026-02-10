@@ -2,6 +2,7 @@
 
 open System.Linq
 open NUnit.Framework
+open NUnit.Framework.Legacy
 open Util
 
 let referencePrimes = Array.toList [|
@@ -66,12 +67,12 @@ let nonPrimes = exceptSorted [1 .. (greatestTestPrime+1)] referencePrimes
 [<Test>]
 let isPrimeTrue () =
     for p in referencePrimes do
-        Assert.IsTrue(Primes.isPrime p, $"{p} reported as not prime")
+        ClassicAssert.IsTrue(Primes.isPrime p, $"{p} reported as not prime")
 
 [<Test>]
 let isPrimeFalse () =
     for np in nonPrimes do
-        Assert.IsFalse(Primes.isPrime np, $"{np} reported as prime")
+        ClassicAssert.IsFalse(Primes.isPrime np, $"{np} reported as prime")
         
 [<Test>]
 let nextPrime () =
@@ -79,58 +80,58 @@ let nextPrime () =
         printfn $"Checking prime #{i} ({referencePrimes.[i]})"
         // The next prime after the value immediately preceding current prime should be the current
         // prime
-        Assert.AreEqual(referencePrimes.[i], Primes.nextPrime (referencePrimes.[i] - 1))
+        ClassicAssert.AreEqual(referencePrimes.[i], Primes.nextPrime (referencePrimes.[i] - 1))
 
         // The next prime after the current prime should be equal to the next prime in the list.
         // I use the prime itself rather than "prime + 1" because that logic
-        Assert.AreEqual(referencePrimes.[i+1], Primes.nextPrime referencePrimes.[i])
+        ClassicAssert.AreEqual(referencePrimes.[i+1], Primes.nextPrime referencePrimes.[i])
 
 [<Test>]
 let primesTest () =
     let primesList = Seq.toList (Primes.primes.Take referencePrimes.Length)
     for i in 0 .. (referencePrimes.Length - 1) do
-        Assert.AreEqual(referencePrimes.[i], primesList.[i])
+        ClassicAssert.AreEqual(referencePrimes.[i], primesList.[i])
 
 [<Test>]
 let nthPrime () =
     for i in 1 .. (referencePrimes.Length / 10) do
-        Assert.AreEqual(referencePrimes.[i-1], Primes.nthPrime i) // -1 because the primes list is zero-indexed
-    Assert.AreEqual(104743, Primes.nthPrime 10001)
+        ClassicAssert.AreEqual(referencePrimes.[i-1], Primes.nthPrime i) // -1 because the primes list is zero-indexed
+    ClassicAssert.AreEqual(104743, Primes.nthPrime 10001)
 
 [<Test>]
 let naivePrimeSieve () =
     // Generate all primes within the table
     let primesList = Primes.naiveSieve (greatestTestPrime + 1)
     for i in 0 .. (referencePrimes.Length - 1) do
-        Assert.AreEqual(referencePrimes.[i], primesList.[i])
+        ClassicAssert.AreEqual(referencePrimes.[i], primesList.[i])
 
 [<Test>]
 let primesBetween () =
-    Assert.AreEqual([2;3], Primes.primesBetween 2 3)
-    Assert.AreEqual([11;13;17;19;23;29;31;37], Primes.primesBetween 11 37)
-    Assert.AreEqual([1009], Primes.primesBetween 1000 1010)
+    ClassicAssert.AreEqual([2;3], Primes.primesBetween 2 3)
+    ClassicAssert.AreEqual([11;13;17;19;23;29;31;37], Primes.primesBetween 11 37)
+    ClassicAssert.AreEqual([1009], Primes.primesBetween 1000 1010)
 
     let expectedPrimes = referencePrimes |> List.filter (fun p -> p.ToString().Length = 3)
     let actualPrimes = Primes.primesBetween 100 999
-    Assert.AreEqual(expectedPrimes, actualPrimes)
+    ClassicAssert.AreEqual(expectedPrimes, actualPrimes)
 
 [<Test>]
 let factorize () =
-    Assert.AreEqual(([]:int list), Primes.factorize 1)
-    Assert.AreEqual([2], Primes.factorize 2)
-    Assert.AreEqual([3], Primes.factorize 3)
-    Assert.AreEqual([2;2], Primes.factorize 4)
-    Assert.AreEqual([5], Primes.factorize 5)
-    Assert.AreEqual([3;2], Primes.factorize 6)
-    Assert.AreEqual([7], Primes.factorize 7)
-    Assert.AreEqual([2;2;2], Primes.factorize 8)
-    Assert.AreEqual([3;3], Primes.factorize 9)
+    ClassicAssert.AreEqual(([]:int list), Primes.factorize 1)
+    ClassicAssert.AreEqual([2], Primes.factorize 2)
+    ClassicAssert.AreEqual([3], Primes.factorize 3)
+    ClassicAssert.AreEqual([2;2], Primes.factorize 4)
+    ClassicAssert.AreEqual([5], Primes.factorize 5)
+    ClassicAssert.AreEqual([3;2], Primes.factorize 6)
+    ClassicAssert.AreEqual([7], Primes.factorize 7)
+    ClassicAssert.AreEqual([2;2;2], Primes.factorize 8)
+    ClassicAssert.AreEqual([3;3], Primes.factorize 9)
 
-    Assert.AreEqual([7;2], Primes.factorize 14)
-    Assert.AreEqual([5;3], Primes.factorize 15)
+    ClassicAssert.AreEqual([7;2], Primes.factorize 14)
+    ClassicAssert.AreEqual([5;3], Primes.factorize 15)
 
-    Assert.AreEqual([11;2], Primes.factorize 22)
+    ClassicAssert.AreEqual([11;2], Primes.factorize 22)
 
-    Assert.AreEqual([23;7;2;2], Primes.factorize 644)
-    Assert.AreEqual([43;5;3], Primes.factorize 645)
-    Assert.AreEqual([19;17;2], Primes.factorize 646)
+    ClassicAssert.AreEqual([23;7;2;2], Primes.factorize 644)
+    ClassicAssert.AreEqual([43;5;3], Primes.factorize 645)
+    ClassicAssert.AreEqual([19;17;2], Primes.factorize 646)

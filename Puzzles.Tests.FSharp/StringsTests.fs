@@ -2,55 +2,56 @@
 
 open System
 open NUnit.Framework
+open NUnit.Framework.Legacy
 open Strings
 
 [<Test>]
 let hasDuplicates () =
-    Assert.IsTrue(hasDuplicates "1123456790")
-    Assert.IsTrue(hasDuplicates "111111")
-    Assert.IsTrue(hasDuplicates "11")
-    Assert.IsTrue(hasDuplicates "1122")
-    Assert.IsTrue(hasDuplicates "aab")
-    Assert.IsTrue(hasDuplicates "abb")
-    Assert.IsTrue(hasDuplicates "abbc")
+    ClassicAssert.IsTrue(hasDuplicates "1123456790")
+    ClassicAssert.IsTrue(hasDuplicates "111111")
+    ClassicAssert.IsTrue(hasDuplicates "11")
+    ClassicAssert.IsTrue(hasDuplicates "1122")
+    ClassicAssert.IsTrue(hasDuplicates "aab")
+    ClassicAssert.IsTrue(hasDuplicates "abb")
+    ClassicAssert.IsTrue(hasDuplicates "abbc")
 
-    Assert.IsFalse(hasDuplicates "1234568790")
-    Assert.IsFalse(hasDuplicates "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv")
+    ClassicAssert.IsFalse(hasDuplicates "1234568790")
+    ClassicAssert.IsFalse(hasDuplicates "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv")
     
 [<Test>]
 let reverse () =
-    Assert.AreEqual("1", (reverse "1"))
-    Assert.AreEqual("12", (reverse "21"))
-    Assert.AreEqual("123", (reverse "321"))
+    ClassicAssert.AreEqual("1", (reverse "1"))
+    ClassicAssert.AreEqual("12", (reverse "21"))
+    ClassicAssert.AreEqual("123", (reverse "321"))
     
 [<Test>]
 let rotate () =
-    Assert.AreEqual("001", (rotate "100"))
+    ClassicAssert.AreEqual("001", (rotate "100"))
     
 [<Test>]
 let rotations () =
-    Assert.AreEqual(["100";"001";"010"], (rotations "100"))
+    ClassicAssert.AreEqual(["100";"001";"010"], (rotations "100"))
     
 [<Test>]
 let isPalindrome () =
-    Assert.IsTrue(isPalindrome "abba")
-    Assert.IsTrue(isPalindrome "abcba")
+    ClassicAssert.IsTrue(isPalindrome "abba")
+    ClassicAssert.IsTrue(isPalindrome "abcba")
     
 [<Test>]
 let isPandigital () =
-    Assert.IsTrue(isPandigital "1" 1)
-    Assert.IsTrue(isPandigital "21" 2)
-    Assert.IsTrue(isPandigital "132" 3)
-    Assert.IsTrue(isPandigital "4132" 4)
-    Assert.IsTrue(isPandigital "41532" 5)
-    Assert.IsTrue(isPandigital "415362" 6)
-    Assert.IsTrue(isPandigital "7415362" 7)
-    Assert.IsTrue(isPandigital "74153628" 8)
-    Assert.IsTrue(isPandigital "974153628" 9)
+    ClassicAssert.IsTrue(isPandigital "1" 1)
+    ClassicAssert.IsTrue(isPandigital "21" 2)
+    ClassicAssert.IsTrue(isPandigital "132" 3)
+    ClassicAssert.IsTrue(isPandigital "4132" 4)
+    ClassicAssert.IsTrue(isPandigital "41532" 5)
+    ClassicAssert.IsTrue(isPandigital "415362" 6)
+    ClassicAssert.IsTrue(isPandigital "7415362" 7)
+    ClassicAssert.IsTrue(isPandigital "74153628" 8)
+    ClassicAssert.IsTrue(isPandigital "974153628" 9)
     
-    Assert.IsFalse(isPandigital "074153628" 9)
-    Assert.IsFalse(isPandigital "9974153628" 9)
-    Assert.IsFalse(isPandigital "74153628" 9)
+    ClassicAssert.IsFalse(isPandigital "074153628" 9)
+    ClassicAssert.IsFalse(isPandigital "9974153628" 9)
+    ClassicAssert.IsFalse(isPandigital "74153628" 9)
 
 [<Test>]
 let lexicographicPermutations () =
@@ -63,7 +64,7 @@ let lexicographicPermutations () =
         "321"
     ]
     let mutable p = lexicographicPermutations "321"
-    Assert.AreEqual(expected, p)
+    ClassicAssert.AreEqual(expected, p)
 
     expected <- [
         "1234";
@@ -93,4 +94,4 @@ let lexicographicPermutations () =
     ]
     p <- lexicographicPermutations "3241"
     printfn "%s" (String.Join("\n", p))
-    Assert.AreEqual(expected, p)
+    ClassicAssert.AreEqual(expected, p)
