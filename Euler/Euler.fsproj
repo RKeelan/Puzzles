@@ -77,7 +77,7 @@
 
   <ItemGroup>
     <PackageReference Include="FSharpx.Collections" Version="3.1.0" />
-    <PackageReference Include="Humanizer" Version="3.0.8" />
+    <PackageReference Include="Humanizer" Version="3.0.10" />
   </ItemGroup>
 
 </Project>
